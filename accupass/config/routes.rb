@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get '/welcome' =>'users#welcome',:as =>'welcome'
+
+  root to: 'users#register' ,:as => 'register'
+
+  get '/login'=> 'users#login' ,:as=>'login'
+  post '/create_login_session' =>'users#create_login_session'
+
+  resource :users,only:[:create]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

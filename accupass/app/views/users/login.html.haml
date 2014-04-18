@@ -1,0 +1,23 @@
+.form
+  .text-left
+    %h4 用户登陆
+  .text-right
+    =link_to "用户注册",register_path
+  %br
+  =form_tag "/create_login_session" do
+    .input-group
+      %span.input-group-addon 账号
+      =text_field_tag :user_name,params[:user_name], :class => 'form-control'
+    %br
+    .input-group
+      %span.input-group-addon 密码
+      =text_field :password,params[:password], :class => 'form-control'
+    %br
+    =submit_tag '登录',:class => 'btn-local'
+
+
+
+
+
+%h1 Users#login
+%p Find me in app/views/users/login.html.haml

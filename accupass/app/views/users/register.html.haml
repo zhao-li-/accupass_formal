@@ -1,0 +1,41 @@
+.form
+  .text-left
+    %h4 新用户注册
+  .text-right
+    =link_to "用户登录",login_path
+  %br
+  =form_for @user do |f|
+    .input-group
+      %span.input-group-addon 账号
+      =f.text_field :user_name, :class => 'form-control'
+    %br
+    .input-group
+      %span.input-group-addon 请设置密码
+      =f.text_field :password, :class => 'form-control'
+    %br
+    .input-group
+      %span.input-group-addon 请确认密码
+      =f.text_field :password_confirmation, :class => 'form-control'
+    %br
+    .input-group
+      %span.input-group-addon 忘记密码问题
+      =f.text_field :forget_question, :class => 'form-control'
+    %br
+    .input-group
+      %span.input-group-addon 忘记密码答案
+      =f.text_field :forget_answer, :class => 'form-control'
+    %p.navbar-text
+      =flash[:error]
+    %br
+    =f.submit '注册',:class => 'btn-local'
+
+
+
+
+
+
+
+
+
+%h1 Users#register
+%p Find me in app/views/users/register.html.haml
