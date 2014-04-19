@@ -12,5 +12,7 @@
     .input-group
       %span.input-group-addon 密码
       =password_field_tag :password,params[:password], :class => 'form-control'
+    .text-right
+      =link_to "忘记密码"
     %br
     =submit_tag '登录',:class => 'btn-local'
