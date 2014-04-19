@@ -11,13 +11,6 @@
     %br
     .input-group
       %span.input-group-addon 密码
-      =text_field :password,params[:password], :class => 'form-control'
+      =password_field_tag :password,params[:password], :class => 'form-control'
     %br
     =submit_tag '登录',:class => 'btn-local'
-
-
-
-
-
-%h1 Users#login
-%p Find me in app/views/users/login.html.haml

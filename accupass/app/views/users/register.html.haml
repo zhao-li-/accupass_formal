@@ -11,11 +11,11 @@
     %br
     .input-group
       %span.input-group-addon 请设置密码
-      =f.text_field :password, :class => 'form-control'
+      =f.password_field :password, :class => 'form-control'
     %br
     .input-group
       %span.input-group-addon 请确认密码
-      =f.text_field :password_confirmation, :class => 'form-control'
+      =f.password_field :password_confirmation, :class => 'form-control'
     %br
     .input-group
       %span.input-group-addon 忘记密码问题
@@ -28,14 +28,3 @@
       =flash[:error]
     %br
     =f.submit '注册',:class => 'btn-local'
-
-
-
-
-
-
-
-
-
-%h1 Users#register
-%p Find me in app/views/users/register.html.haml

@@ -11,9 +11,13 @@ class UsersController < ApplicationController
   end
 
   def create_login_session
-    user = User.find_by_name(params[:user_name])
+
+    user = User.find_by_user_name(params[:user_name])
+    p '........................'
+    p user.authenticate(params[:password])
     if user && user.authenticate(params[:password])
       cookies.permanent[:token] = user.token
+      p 'aaaaaaaaaaaaaaaaaaaaaaaa'
       redirect_to :welcome
     else
       redirect_to :login
@@ -23,7 +27,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      render :welcome
+      redirect_to :welcome
     else
       render :register
     end
