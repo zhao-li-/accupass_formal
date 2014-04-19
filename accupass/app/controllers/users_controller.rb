@@ -1,6 +1,9 @@
 #encoding: utf-8
 class UsersController < ApplicationController
   def welcome
+    if !current_user
+      redirect_to :login
+    end
   end
 
   def register
@@ -10,17 +13,18 @@ class UsersController < ApplicationController
   def login
   end
 
-  def create_login_session
+  def logout
+    cookies.delete(:token)
+    redirect_to :login
+  end
 
+  def create_login_session
     user = User.find_by_user_name(params[:user_name])
-    p '........................'
-    p user.authenticate(params[:password])
     if user && user.authenticate(params[:password])
       cookies.permanent[:token] = user.token
-      p 'aaaaaaaaaaaaaaaaaaaaaaaa'
       redirect_to :welcome
     else
-      redirect_to :login
+      render :login
     end
   end
 

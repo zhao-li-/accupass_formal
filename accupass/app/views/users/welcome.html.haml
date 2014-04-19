@@ -1,2 +1,4 @@
-%h1 Users#welcome
-%p Find me in app/views/users/welcome.html.haml
+.text-right
+    你好，
+    =current_user.user_name
+    =link_to "退出",logout_path,method: "delete"
