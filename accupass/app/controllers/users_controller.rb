@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      cookies.permanent[:token]=@user.token
       redirect_to :welcome
     else
       render :register

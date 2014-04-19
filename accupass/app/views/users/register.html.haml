@@ -24,7 +24,9 @@
     .input-group
       %span.input-group-addon 忘记密码答案
       =f.text_field :forget_answer, :class => 'form-control'
-    %p.navbar-text
-      =flash[:error]
+    %br
+    - if @user.errors.any?
+      .alert.alert-danger
+        =@user.errors.full_messages.first
     %br
     =f.submit '注册',:class => 'btn-local'

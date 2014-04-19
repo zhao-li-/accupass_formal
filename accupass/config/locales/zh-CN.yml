@@ -1,0 +1,26 @@
+zh-CN:
+  activerecord:
+    attributes:
+      user:
+        user_name: ""
+        password: ""
+        forget_question: ""
+        password_confirmation: ""
+        forget_answer: ""
+    errors:
+      models:
+        user:
+          attributes:
+            user_name:
+              blank: "请将注册信息填写完整"
+              taken: "该账号已注册"
+            password:
+              blank: "请将注册信息填写完整"
+            password_confirmation:
+              confirmation: "两次密码输入不一致，请重新输入"
+            password_digest:
+              blank: "请将注册信息填写完整"
+            forget_answer:
+              blank: "请将注册信息填写完整"
+            forget_question:
+              blank: "请将注册信息填写完整"
