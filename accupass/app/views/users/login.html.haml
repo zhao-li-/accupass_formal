@@ -15,4 +15,8 @@
     .text-right
       =link_to "忘记密码"
     %br
+    - if flash[:error]
+      .alert.alert-danger
+        =flash[:error]
+    %br
     =submit_tag '登录',:class => 'btn-local'
