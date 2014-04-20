@@ -5,24 +5,29 @@
     =link_to "用户登录",login_path
   %br
   =form_for @user do |f|
-    .input-group
-      %span.input-group-addon 账号
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        账号
       =f.text_field :user_name, :class => 'form-control'
     %br
-    .input-group
-      %span.input-group-addon 请设置密码
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        请设置密码
       =f.password_field :password, :class => 'form-control'
     %br
-    .input-group
-      %span.input-group-addon 请确认密码
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        请确认密码
       =f.password_field :password_confirmation, :class => 'form-control'
     %br
-    .input-group
-      %span.input-group-addon 忘记密码问题
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        忘记密码问题
       =f.text_field :forget_question, :class => 'form-control'
     %br
-    .input-group
-      %span.input-group-addon 忘记密码答案
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        忘记密码答案
       =f.text_field :forget_answer, :class => 'form-control'
     %br
     - if @user.errors.any?
