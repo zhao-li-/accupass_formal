@@ -5,16 +5,33 @@
     %table.table
       %thead
         %tr
+          %th
           %th 编号
           %th 用户名
+          %th
           %th 操作
       %tbody
-        =@users.each do |user|
+        -@users.each do |user|
           %tr
+            %td
             %td
               =user.id - 30
             %td
               =user.user_name
+            %th
             %td
               =link_to "删除"
               =link_to "修改密码"
+  .text-right
+    %ul.pagination.pagination-sm
+      %li.disabled
+        %a{:href => "#"} &laquo;
+      %li.active
+        %a{:href => "#"}
+          1
+          %span.sr-only (current)
+      %li.disabled
+        %a{:href => "#"}
+          2
+      %li.disabled
+        %a{:href => "#"} &raquo;
