@@ -29,6 +29,10 @@ gem 'spring',        group: :development
 gem 'haml-rails'
 gem 'bcrypt-ruby'
 gem 'protected_attributes'
+gem 'bootstrap-sass'
+gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
