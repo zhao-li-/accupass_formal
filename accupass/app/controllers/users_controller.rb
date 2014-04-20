@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     if !current_user
       redirect_to :login
     end
+    @users = User.all
   end
 
   def register

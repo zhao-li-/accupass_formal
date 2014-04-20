@@ -1,0 +1,20 @@
+-if current_user[:user_name]=="admin"
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title 用户管理
+    %table.table
+      %thead
+        %tr
+          %th 编号
+          %th 用户名
+          %th 操作
+      %tbody
+        =@users.each do |user|
+          %tr
+            %td
+              =user.id - 30
+            %td
+              =user.user_name
+            %td
+              =link_to "删除"
+              =link_to "修改密码"
