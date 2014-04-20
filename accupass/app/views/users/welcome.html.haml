@@ -1,7 +1,9 @@
 -if current_user[:user_name]=="admin"
   .panel.panel-default
     .panel-heading
-      %h3.panel-title 用户管理
+      %h3.panel-title
+        用户管理
+        %button.btn.btn-default +添加用户
     %table.table
       %thead
         %tr
@@ -23,4 +25,4 @@
               =link_to "删除"
               =link_to "修改密码"
   .text-right
-    = will_paginate :previous_label=>'&laquo',:next_label=>'&raquo'
+    = will_paginate @users, :previous_label=>'&laquo',:next_label=>'&raquo'
