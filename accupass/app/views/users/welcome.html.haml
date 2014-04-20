@@ -11,16 +11,16 @@
           %th
           %th 操作
       %tbody
-        .pagination
-          - @users.each do |user|
-            %tr
-              %td
-              %td
-                =user.id - 30
-              %td
-                =user.user_name
-              %th
-              %td
-                =link_to "删除"
-                =link_to "修改密码"
-          = will_paginate
+        - @users.each do |user|
+          %tr
+            %td
+            %td
+              =user.id - 30
+            %td
+              =user.user_name
+            %th
+            %td
+              =link_to "删除"
+              =link_to "修改密码"
+  .text-right
+    = will_paginate :previous_label=>'&laquo',:next_label=>'&raquo'
