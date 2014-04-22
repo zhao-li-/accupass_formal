@@ -1,7 +1,8 @@
-%h1
-  活动通
+%div(style="float:left" )
+  %h1
+    活动通
 -if current_user
-  .text-right
+  .text-right(style="float:right;margin-top:10px" )
     你好，
     =current_user.user_name
     =link_to "退出",logout_path,method: "delete"
