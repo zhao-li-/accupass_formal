@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
   def add_user
+    @user = User.new
   end
 
   def del_user

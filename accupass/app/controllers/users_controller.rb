@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   def welcome
     if !current_user
       redirect_to :login
+    elsif current_user.admin?
+      redirect_to :manager_index
     end
   end
 
@@ -35,11 +37,19 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if @user.save
-      cookies.permanent[:token]=@user.token
-      redirect_to :welcome
+    if current_user.admin?
+      if @user.save
+        redirect_to :manager_index
+      else
+        render 'admin/add_user'
+      end
     else
-      render :register
+      if @user.save
+        cookies.permanent[:token]=@user.token
+        redirect_to :welcome
+      else
+        render :register
+      end
     end
   end
 end

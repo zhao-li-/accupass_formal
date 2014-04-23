@@ -9,11 +9,14 @@
     border-radius: 4px ;
 }
 .btn-local{
-    width: 130px;
     font-size: 15px;
     margin-left: -20px;
-    padding: 0px 40px 0px 40px;
+    padding: 5px 40px ;
     line-height: 25px;
     background-color: #ffffff;
-    border-radius: 6px ;
+    border: 1px solid #ccc;
+    border-radius: 4px ;
+}
+a:hover {
+    text-decoration:none
 }

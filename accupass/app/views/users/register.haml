@@ -1,0 +1,37 @@
+.form
+  .text-left
+    %h4 新用户注册
+  .text-right
+    =link_to "用户登录",login_path
+  %br
+  =form_for @user do |f|
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        账号
+      =f.text_field :user_name, :class => 'form-control'
+    %br
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        请设置密码
+      =f.password_field :password, :class => 'form-control'
+    %br
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        请确认密码
+      =f.password_field :password_confirmation, :class => 'form-control'
+    %br
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        忘记密码问题
+      =f.text_field :forget_question, :class => 'form-control'
+    %br
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        忘记密码答案
+      =f.text_field :forget_answer, :class => 'form-control'
+    %br
+    - if @user.errors.any?
+      .alert.alert-danger
+        =@user.errors.full_messages.first
+    %br
+    =f.submit '注册',:class => 'btn-local'
