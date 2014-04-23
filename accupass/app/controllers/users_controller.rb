@@ -4,7 +4,6 @@ class UsersController < ApplicationController
     if !current_user
       redirect_to :login
     end
-    @users = User.where("id > 31").paginate(page: params[:page],per_page: 10)
   end
 
   def register
@@ -23,7 +22,11 @@ class UsersController < ApplicationController
     user = User.find_by_user_name(params[:user_name])
     if user && user.authenticate(params[:password])
       cookies.permanent[:token] = user.token
-      redirect_to :welcome
+      if user.admin?
+        redirect_to :manager_index
+      else
+        redirect_to :welcome
+      end
     else
       flash[:error]="用户名不存在或密码错误"
       redirect_to :login

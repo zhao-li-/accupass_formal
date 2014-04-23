@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'admin/add_user'
+  get 'add_user'=> 'admin#add_user',:as =>'add_user'
 
-  get 'admin/del_user'
+  get  'del_user'=> 'admin#del_user',:as => 'del_user'
 
-  get 'admin/manager_index'
+  get  'manager_index'=> 'admin#manager_index',:as =>'manager_index'
 
   root to:  'users#welcome', :as => 'welcome'
 
