@@ -12,5 +12,9 @@ class User < ActiveRecord::Base
     end while User.exists?(column=>self[column])
   end
 
+  def user_params
+    params.require(:user).permit(:user_name, :password, :password_confirmation, :forget_question, :forget_answer, :token)
+  end
+
 
 end

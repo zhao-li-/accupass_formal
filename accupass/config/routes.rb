@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'admin/add_user'
+
+  get 'admin/del_user'
+
+  get 'admin/manager_index'
+
   root to:  'users#welcome', :as => 'welcome'
 
   get '/register' =>'users#register', :as => 'register'

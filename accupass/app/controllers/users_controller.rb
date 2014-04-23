@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if !current_user
       redirect_to :login
     end
-    @users = User.paginate(page: params[:page],per_page: 10)
+    @users = User.where("id > 31").paginate(page: params[:page],per_page: 10)
   end
 
   def register

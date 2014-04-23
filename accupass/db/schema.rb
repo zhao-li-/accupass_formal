@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417145515) do
+ActiveRecord::Schema.define(version: 20140423052753) do
 
   create_table "users", force: true do |t|
     t.string   "user_name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140417145515) do
     t.string   "forget_answer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",           default: false
   end
 
 end
