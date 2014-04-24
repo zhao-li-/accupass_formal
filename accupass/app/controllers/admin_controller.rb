@@ -12,7 +12,7 @@ class AdminController < ApplicationController
   end
 
   def change_password
-
+    @user = User.find_by_user_name(params[:user_name])
   end
 
   def manager_index
