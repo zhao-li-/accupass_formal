@@ -13,11 +13,13 @@
         %th
         %th 操作
     %tbody
+      -a = 1
       - @users.each do |user|
         %tr
           %td
           %td
-            =user.id - 31
+            =(@page_index.to_i - 1)*10 + a
+            - a+=1
           %td
             =user.user_name
           %th

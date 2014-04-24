@@ -11,10 +11,15 @@ class AdminController < ApplicationController
     redirect_to :manager_index
   end
 
+  def change_password
+
+  end
+
   def manager_index
     if !current_user
       redirect_to :login
     end
-    @users = User.where("id > 31").paginate(page: params[:page],per_page: 10)
+    @page_index = params[:page] ||1
+    @users = User.where("id > 2").paginate(page: params[:page],per_page: 10)
   end
 end
