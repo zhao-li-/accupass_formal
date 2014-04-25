@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if current_user.admin?
+    if current_user && current_user.admin?
       if @user.save
         redirect_to :manager_index
       else

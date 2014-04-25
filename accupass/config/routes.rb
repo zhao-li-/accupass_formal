@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/login' => 'users#login', :as => 'login'
   post '/create_login_session' => 'users#create_login_session'
   delete "logout" => "users#logout", :as => "logout"
-  get '/change_password'=>'admin#change_password'
+  post 'change_password'=>'admin#post_change_password'
   delete '/del_user'=>'admin#del_user'
 
   resource :users, only: [:create]
