@@ -57,17 +57,25 @@ class UsersController < ApplicationController
   end
 
   def post_forget_first
-    p'..............................'
-    p params[:user][:user_name]
     if params[:user][:user_name]==''
       flash.now[:error] ='账号不能为空'
     end
     user = User.find_by_user_name(params[:user][:user_name])
-    p user
     if user
-      redirect_to forget_second_path(:user_name=>params[:user][:user_name])
+      session[:change_user_name]=params[:user][:user_name]
+      redirect_to forget_second_path
     else
       render :forget_first
     end
+  end
+
+  def forget_second
+    user =User.find_by_user_name(session[:change_user_name])
+    @forget_question = user[:forget_question]
+  end
+
+  def post_forget_second
+    user =User.find_by_user_name(session[:change_user_name])
+
   end
 end

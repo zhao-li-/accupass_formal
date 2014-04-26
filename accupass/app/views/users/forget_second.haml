@@ -1,1 +1,22 @@
-dddddddddd
+.form
+  .text-left
+    %h4 重置密码
+  .text-right
+    =link_to "用户登录",login_path
+  %br
+  =form_for :user, url: '/post_forget_second' do |f|
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        忘记密码问题
+      =f.label @forget_question, :class => 'name form-control'
+    %br
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        忘记密码答案
+      =f.text_field :forget_answer, :class => 'form-control',:placeholder => '请输入答案'
+    %br
+    - if flash.now[:error]
+      .alert.alert-danger
+        =flash.now[:error]
+    %br
+    =f.submit '下一步',:class => 'btn-local'
