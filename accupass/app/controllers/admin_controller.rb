@@ -24,9 +24,8 @@ class AdminController < ApplicationController
       @user.password = params[:user][:password]
       @user.password_confirmation = params[:user][:password_confirmation]
       if @user.save
-        # flash[:succeed] = "jj"
-        # render :change_password
-        redirect_to :manager_index
+        flash.now[:succeed] = "jj"
+        render :change_password
       end
     end
   end

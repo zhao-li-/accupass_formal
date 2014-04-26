@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post '/post_change_password'=>'admin#post_change_password'
   delete '/del_user'=>'admin#del_user'
   get '/forget_first' => 'users#forget_first',:as => 'forget_first'
+  post '/post_forget_first' => 'users#post_forget_first'
+  get '/forget_second' => 'users#forget_second',:as => 'forget_second'
 
   resource :users, only: [:create]
 

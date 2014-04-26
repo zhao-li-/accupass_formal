@@ -55,4 +55,19 @@ class UsersController < ApplicationController
 
   def forget_first
   end
+
+  def post_forget_first
+    p'..............................'
+    p params[:user][:user_name]
+    if params[:user][:user_name]==''
+      flash.now[:error] ='账号不能为空'
+    end
+    user = User.find_by_user_name(params[:user][:user_name])
+    p user
+    if user
+      redirect_to forget_second_path(:user_name=>params[:user][:user_name])
+    else
+      render :forget_first
+    end
+  end
 end
