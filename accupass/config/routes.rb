@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post '/post_forget_first' => 'users#post_forget_first'
   get '/forget_second' => 'users#forget_second',:as => 'forget_second'
   post '/post_forget_second'=>'users#post_forget_second'
+  get '/forget_third'=>'users#forget_third',:as => 'forget_third'
 
   resource :users, only: [:create]
 

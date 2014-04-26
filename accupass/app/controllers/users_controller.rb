@@ -87,4 +87,8 @@ class UsersController < ApplicationController
       redirect_to :forget_third
     end
   end
+
+  def forget_third
+
+  end
 end

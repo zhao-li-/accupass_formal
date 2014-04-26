@@ -1,0 +1,18 @@
+.form
+  .text-left
+    %h4 重置密码
+  .text-right
+    =link_to "用户登录",login_path
+  %br
+  =form_for :user,url: '/post_forget_third' do |f|
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        请设置密码
+      =f.password_field :password, :class => 'form-control',:placeholder => '请输入新密码'
+    %br
+    .input-group(style="width:100%" )
+      %span.input-group-addon(style="width:25%" )
+        请确认密码
+      =f.password_field :password_confirmation, :class => 'form-control',:placeholder => '请再次输入'
+    %br
+    =f.submit '确认修改',:class => 'btn-local'
