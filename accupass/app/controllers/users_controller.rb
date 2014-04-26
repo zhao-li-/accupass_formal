@@ -91,4 +91,19 @@ class UsersController < ApplicationController
   def forget_third
 
   end
+
+  def post_forget_third
+    user = User.find_by_user_name(session[:change_user_name])
+    if params[:user][:password]!=params[:user][:password_confirmation]
+      flash.now[:error]='两次密码输入不一致，请重新输入'
+      render :forget_third
+    else
+      user.password = params[:user][:password]
+      user.password_confirmation = params[:user][:password_confirmation]
+      if user.save
+        cookies.permanent[:token] = user.token
+        redirect_to :welcome
+      end
+    end
+  end
 end

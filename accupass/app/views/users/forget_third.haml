@@ -15,4 +15,8 @@
         请确认密码
       =f.password_field :password_confirmation, :class => 'form-control',:placeholder => '请再次输入'
     %br
+    - if flash.now[:error]
+      .alert.alert-danger
+        =flash.now[:error]
+    %br
     =f.submit '确认修改',:class => 'btn-local'
