@@ -12,37 +12,11 @@ class AdminController < ApplicationController
   end
 
   def change_password
-    # user_name = params[:user_name]
-    p '============================================'
-    p params[:user_name]
     @user = User.find_by_user_name(params[:user_name])
-
-    # if request.post?
-    #   if params[:password]!= params[:password_confirmation]
-    #     flash[:error]="两次密码输入不一致，请重新输入"
-    #   else
-
-    #     @user.password = params[:password]
-    #     @user.password_confirmation = params[:password_confirmation]
-    #     if @user.save
-    #       # alert 'ss'
-    #       redirect_to :manager_index
-    #     else
-    #       render :change_password
-    #     end
-    #   end
-    # end
   end
 
   def post_change_password
-    p"................................"
-    # p params[:user_name]
-    p params[:user][:user_name]
-    p params[:user][:password]
-    p params[:user][:password_confirmation]
     @user = User.find_by_user_name(params[:user][:user_name])
-    p @user[:user_name]
-    p @user[:password]
     if params[:user][:password]!= params[:user][:password_confirmation]
       flash[:error]="两次密码输入不一致，请重新输入"
       render :change_password

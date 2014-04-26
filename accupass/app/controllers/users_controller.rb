@@ -52,4 +52,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def forget_first
+  end
 end

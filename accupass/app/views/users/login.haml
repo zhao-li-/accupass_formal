@@ -15,7 +15,7 @@
         密码
       =password_field_tag :password,params[:password], :class => 'form-control'
     .text-right
-      =link_to "忘记密码"
+      =link_to "忘记密码",forget_first_path
     %br
     - if flash[:error]
       .alert.alert-danger

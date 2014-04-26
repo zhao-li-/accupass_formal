@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   delete "logout" => "users#logout", :as => "logout"
   post '/post_change_password'=>'admin#post_change_password'
   delete '/del_user'=>'admin#del_user'
+  get '/forget_first' => 'users#forget_first',:as => 'forget_first'
 
   resource :users, only: [:create]
 

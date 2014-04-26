@@ -1,0 +1,13 @@
+.form
+  .text-left
+    %h4 重置密码
+  .text-right
+    =link_to "用户登录",login_path
+  %br
+  .input-group(style="width:100%" )
+    %span.input-group-addon(style="width:25%" )
+      账号
+    %input.form-control{:placeholder => "请输入账号名"}
+  %br
+  %button.btn-local
+    下一步
