@@ -8,7 +8,8 @@
     .input-group(style="width:100%" )
       %span.input-group-addon(style="width:25%" )
         忘记密码问题
-      =f.label @forget_question, :class => 'name form-control'
+      %label.name.form-control
+        =@forget_question
     %br
     .input-group(style="width:100%" )
       %span.input-group-addon(style="width:25%" )

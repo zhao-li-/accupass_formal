@@ -76,6 +76,15 @@ class UsersController < ApplicationController
 
   def post_forget_second
     user =User.find_by_user_name(session[:change_user_name])
-
+    @forget_question = user[:forget_question]
+    if params[:user][:forget_answer]==""
+      flash.now[:error]="请输入答案"
+      render :forget_second
+    elsif params[:user][:forget_answer]!=user[:forget_answer]
+      flash.now[:error]="忘记密码答案错误"
+      render :forget_second
+    else
+      redirect_to :forget_third
+    end
   end
 end
