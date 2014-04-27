@@ -11,7 +11,7 @@ function ActivityListController($scope,$navigate){
     }
     $scope.reverse_the_activity_list();
     $scope.no_list=function(){
-        if(Activity.get_activities().length == 0){
+        if(Activity.reverse_activities().length == 0){
             $navigate.go('/create', 'slide', 'left');
         }
     }

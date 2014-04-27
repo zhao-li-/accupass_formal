@@ -1,6 +1,7 @@
 function Activity(name){
     this.name = name;
     this.status = 'default';
+    this.user_name = localStorage.current_user
 }
 
 Activity.prototype.save_activities = function() {
@@ -16,7 +17,7 @@ Activity.get_activities = function(){
 Activity.prototype.is_repeated_in_activities = function(){
     var activity_name = this.name;
     return _.some(Activity.get_activities(),function(activity){
-        return activity.name == activity_name
+        return activity.name == activity_name && activity.user_name == localStorage.current_user
     })
 }
 
@@ -26,10 +27,13 @@ Activity.save_current_activity = function(activity_name){
 
 Activity.reverse_activities = function(){
     var activities = Activity.get_activities();
-    if(activities.length != 0){
-        activities.reverse();
+    var current_activities = _.filter(activities,function(activity){
+        return activity.user_name ==localStorage.current_user
+    })
+    if(current_activities.length != 0){
+        current_activities.reverse();
     }
-    return activities;
+    return current_activities;
 }
 
 Activity.yellow_when_start_bidding = function(name){
