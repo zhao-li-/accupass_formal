@@ -29,13 +29,13 @@ var native_accessor = {
                         return;
                     }
                     var activity= _.find(JSON.parse(localStorage.getItem("activities")),function(activity) {
-                        return activity.name == localStorage.getItem("enter_into_it")
+                        return activity.name == localStorage.getItem("enter_into_it") && activity.user_name == localStorage.current_user
                     });
                     if(activity.status == "over"){
-                        native_accessor.send_sms(received_message.phone,"活动已结束");
+                        native_accessor.send_sms(json_message.messages[0].phone,"活动已结束");
                         return;
                     }
-                    native_accessor.send_sms(received_message.phone,"活动尚未开始");
+                    native_accessor.send_sms(json_message.messages[0].phone,"活动尚未开始");
                 },
                 JJ: function() {
                     if(isNaN(BidMessages.get_price(json_message))){

@@ -82,6 +82,6 @@ Activity.change_current_activity_status = function(status){
 Activity.filter_current_activity_apply_messages = function (){
     return _.filter(ApplyMessages.get_apply_messages(),function(received_message) {
         var enter_into_it = Activity.get_current_activity_name();
-        return received_message.activity_name == enter_into_it;
+        return received_message.activity_name == enter_into_it && received_message.current_user == localStorage.current_user;
     });
 }

@@ -5,6 +5,7 @@ function ApplyMessages (json_message){
         return activity.status == "start";
     })
     this.activity_name = start_activities.name;
+    this.current_user = localStorage.current_user
 }
 
 ApplyMessages.get_apply_messages = function(){
@@ -24,7 +25,7 @@ ApplyMessages.get_start_activity = function(){
 ApplyMessages.prototype.have_applied = function(){
     var phone = this.phone;
     return _.find(ApplyMessages.get_apply_messages(),function(received_message){
-        return received_message.phone == phone && received_message.activity_name == localStorage.enter_into_it
+        return received_message.phone == phone && received_message.activity_name == localStorage.enter_into_it &&received_message.current_user == localStorage.current_user
     })
 }
 
