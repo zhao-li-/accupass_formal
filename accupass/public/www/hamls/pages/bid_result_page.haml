@@ -1,0 +1,38 @@
+#luck_draw_setting_flag.ng-scope
+  %header
+    竞价{{bid_id}}({{bid_num}}人)
+    .header-left
+      %button.btn-4(ng-tap="go_bid_list()" )返回
+    .header-right(ng-tap="go_price_statistic()" )
+      %button.btn.btn-4(ng-disabled="disable_end")统计
+  %wrapper.wrapper.scrollable
+    %ul.list-style-2
+      %li(ng-repeat="bid_apply in bid_applies ")
+        %h3(style="height:20px" )
+          {{bid_apply.user_name}}
+        %h2.header-right
+          ￥{{bid_apply.price}}
+        %h3
+          {{bid_apply.phone}}
+  #bid_succeed.modal.hide.fade.in
+    .modal-body
+      %button(class="close" data-dismiss="modal" ng-tap="show_footer()") &times;
+      %h3.text-center
+        {{winner_name}}　　￥{{winner_price}}
+      %h3.text-center
+        {{winner_phone}}
+      %h3.text-center
+        竞价成功！
+  #bid_failed.modal.hide.fade
+    .modal-body
+      %button(class="close" data-dismiss="modal" ng-tap="show_footer()") &times;
+      %h3 竞价失败！
+  %footer(ng-show="succeed")
+    %p.text-center
+      竞价结果：{{winner_name}}&nbsp;&nbsp;￥{{winner_price}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{winner_phone}}
+  %footer(ng-show="failed")
+    %p.text-center 竞价失败！
+
+
+
+

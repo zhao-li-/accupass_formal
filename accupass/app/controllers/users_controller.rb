@@ -1,5 +1,6 @@
 #encoding: utf-8
 class UsersController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => [:process_phone_login ]
   def welcome
     if !current_user
       redirect_to :login
@@ -89,7 +90,6 @@ class UsersController < ApplicationController
   end
 
   def forget_third
-
   end
 
   def post_forget_third
@@ -103,6 +103,19 @@ class UsersController < ApplicationController
       if user.save
         cookies.permanent[:token] = user.token
         redirect_to :welcome
+      end
+    end
+  end
+
+  def process_phone_login
+    p '..............................'
+    p params[:user_name]
+    user = User.find_by_user_name(params[:user_name])
+    respond_to do |format|
+      if user && user.authenticate(params[:password])
+        format.json { render json: "true" }
+      else
+        format.json { render json: 'false' }
       end
     end
   end

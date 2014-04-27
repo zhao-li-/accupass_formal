@@ -1,0 +1,20 @@
+#luck_draw_setting_flag.ng-scope
+  %header
+    竞价列表
+    .header-left
+      %button.btn-4(ng-tap="go_activity_list()" )返回
+    .header-right(ng-tap="start_bid()" )
+      %button.btn.btn-4(ng-disabled="disable_bid_list_start")开始
+    %ul.list-style-2
+      %li(ng-repeat="bid_list in bid_lists" class="{{bid_list.status}}"  )
+        %a(ng-tap="go_bid_apply(bid_list.bid_id)" )
+          %h3()
+            竞价{{bid_list.bid_id}}
+  %footer
+    %ul.footer-nav.footer-nav-2tabs
+      %li
+        %a(ng-tap="go_sign_up()")
+          %i.icon-list报名
+      %li.active
+        %a
+          %i.icon-list竞价

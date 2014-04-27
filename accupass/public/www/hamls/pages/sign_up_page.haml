@@ -1,0 +1,23 @@
+#luck_draw_setting_flag.ng-scope
+  %header#sign_up_page
+    活动报名({{apply_lists.length}})
+    .header-left
+      %button.btn-4(ng-tap="go_list()" )返回
+    .header-right(ng-tap="start_or_end_apply()" )
+      %button.btn.btn-4(ng-disabled="disable_start")
+        {{button_name}}
+  %wrapper.wrapper.scrollable
+    %ul.list-style-2
+      %li(ng-repeat="apply_list in apply_lists"  )
+        %h3
+          {{apply_list.user_name}}
+        %h3.header-right
+          {{apply_list.phone}}
+  %footer
+    %ul.footer-nav.footer-nav-2tabs
+      %li.active
+        %a
+          %i.icon-list报名
+      %li
+        %a(ng-tap="go_bid()")
+          %i.icon-list竞价

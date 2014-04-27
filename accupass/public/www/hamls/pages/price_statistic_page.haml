@@ -1,0 +1,19 @@
+#luck_draw_setting_flag.ng-scope
+  %header
+    竞价{{bid_id}}({{bid_num}}人)
+    .header-left(ng-tap="go_bid_list()" )
+      %button.btn-4返回
+    .header-right(ng-tap="go_bid_result()" )
+      %button.btn.btn-4列表
+  %wrapper.wrapper.scrollable
+    %ul.list-style-2
+      %li(ng-repeat="price_count_info in price_count_infos"  )
+        %h3
+          ￥{{price_count_info.price}}
+        %h3.header-right
+          {{price_count_info.count}}人
+  %footer(ng-show="succeed")
+    %p.text-center
+      竞价结果：{{winner_name}}&nbsp;&nbsp;￥{{winner_price}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{winner_phone}}
+  %footer(ng-show="failed")
+    %p.text-center 竞价失败！

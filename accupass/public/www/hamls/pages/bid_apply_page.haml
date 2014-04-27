@@ -1,0 +1,17 @@
+#luck_draw_setting_flag.no-footer.ng-scope
+  %header#bid_apply_page
+    竞价{{bid_id}}({{bid_num}}人)
+    .header-left
+      %button.btn-4(ng-tap="go_bid_list()" )返回
+    .header-right(ng-tap="start_end_bid()" )
+      %button.btn.btn-4(ng-disabled="disable_end")
+        {{button_name}}
+  %wrapper.wrapper.scrollable
+    %ul.list-style-2
+      %li(ng-repeat="bid_apply in bid_applies"  )
+        %h3
+          {{bid_apply.user_name}}
+        %h3.header-right
+          {{bid_apply.phone}}
+
+

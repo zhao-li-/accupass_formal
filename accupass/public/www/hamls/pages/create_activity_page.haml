@@ -1,0 +1,17 @@
+#luck_draw_setting_flag.no-footer.ng-scope
+  %header
+    %p创建活动
+    .header-left
+      %button.btn-4(ng-tap="go_list()"ng-show="if_have_activity")返回
+  #wrapper.wrapper.scrollable
+    .wrapper-inner
+      .form-wrapper
+        %h5活动名称
+        %input.input-full(type="text" ng-model="activity_name" )
+        %p(style="color:red" )
+          {{tips}}
+        %button.btn.btn-2( ng-tap="create_activity()" ng-disabled="!activity_name")创建
+
+
+
+

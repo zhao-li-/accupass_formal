@@ -1,0 +1,13 @@
+#luck_draw_setting_flag.no-footer.ng-scope
+  %header
+    活动列表
+    .header-left
+      %button.btn-4(ng-tap='post_data()')同步数据
+    .header-right
+      %button.btn-4(ng-tap="go_create()")创建活动
+  %wrapper.wrapper.scrollable
+    %ul.list-style-2
+      %li(ng-repeat="activity in activities" class="{{activity.status}} || {{yellow_when_bidding(activity.name)}}" )
+        %a(ng-tap="go_sign_up(activity.name)" )
+          %h3()
+            {{activity.name}}

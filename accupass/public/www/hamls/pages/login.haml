@@ -1,0 +1,12 @@
+%h1.text-center 活动通
+.form
+  %br
+  %input.input-full(type="text" ng-model="user_name" placeholder="请输入账号" )
+  %br
+  %br
+  %input.input-full(type="password" ng-model="password" placeholder="请输入密码" )
+  %label(style="color:red" ng-show='show_error')
+    用户名或密码错误
+  %button.btn-local(ng-tap='post_user()')
+    登录
+
