@@ -1,7 +1,8 @@
 function Bid (count){
     this.activity_name = Activity.get_current_activity().name;
     this.bid_id = count;
-    this.status = "default"
+    this.status = "default";
+    this.current_user = localStorage.current_user
 }
 
 Bid.get_bid_infos = function (){
@@ -10,7 +11,7 @@ Bid.get_bid_infos = function (){
 
 Bid.filter_current_bid_infos= function (){
     return _.filter(Bid.get_bid_infos(),function(bid_info){
-        return bid_info.activity_name == Activity.get_current_activity.name ;
+        return bid_info.activity_name == Activity.get_current_activity.name &&bid_info.current_user == localStorage.current_user ;
     }) || [];
 }
 
@@ -27,7 +28,7 @@ Bid.create_bid = function(count){
 
 Bid.get_count = function (){
     var bid_lists = _.filter(Bid.get_bid_infos(),function(bid_info){
-        return bid_info.activity_name == Activity.get_current_activity_name() ;
+        return bid_info.activity_name == Activity.get_current_activity_name() &&bid_info.current_user == localStorage.current_user ;
     }) || [];
     var count = bid_lists.length;
     return count;
@@ -40,7 +41,7 @@ Bid.start_bid = function(){
 
 Bid.bid_list = function (){
     var bid_lists = _.filter(Bid.get_bid_infos(),function(bid_info){
-        return bid_info.activity_name == Activity.get_current_activity_name() ;
+        return bid_info.activity_name == Activity.get_current_activity_name() &&bid_info.current_user == localStorage.current_user ;
     }) || [];
     bid_lists.reverse();
     return bid_lists;
@@ -56,7 +57,7 @@ Bid.get_current_bid_id = function(){
 
 Bid.get_current_bid =function(){
     return  _.find(Bid.get_bid_infos(),function(bid_info){
-        return bid_info.activity_name == localStorage.enter_into_it && bid_info.bid_id == localStorage.enter_into_bid
+        return bid_info.activity_name == localStorage.enter_into_it && bid_info.bid_id == localStorage.enter_into_bid &&bid_info.current_user == localStorage.current_user ;
     })
 }
 
@@ -93,7 +94,7 @@ Bid.clear_winner_info = function(){
 
 Bid.get_current_bid_messages = function(){
     return _.filter(JSON.parse(localStorage.getItem("bid_messages")),function(bid_message){
-        return bid_message.activity_name == localStorage.enter_into_it && bid_message.bid_id == localStorage.enter_into_bid
+        return bid_message.activity_name == localStorage.enter_into_it && bid_message.bid_id == localStorage.enter_into_bid &&bid_message.current_user==localStorage.current_user
     })
 }
 

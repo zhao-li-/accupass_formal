@@ -18,7 +18,7 @@ ApplyMessages.fore_two_string = function(json_message){
 
 ApplyMessages.get_start_activity = function(){
     return _.find(JSON.parse(localStorage.getItem("activities")),function(activity) {
-        return activity.status == "start";
+        return activity.status == "start" &&activity.user_name == localStorage.current_user;
     });
 }
 
