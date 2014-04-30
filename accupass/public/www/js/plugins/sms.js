@@ -42,7 +42,6 @@ var native_accessor = {
                         return;
                     }
                     if(BidMessages.get_start_bid()){
-                        console.log("here")
                         if(BidMessages.no_find_applied(json_message)){
                             native_accessor.send_sms(json_message.messages[0].phone,"对不起，您没有报名此次活动！");
                             return;
@@ -58,7 +57,6 @@ var native_accessor = {
                         return;
                     }
                     var current_bid = BidMessages.get_last_bid();
-                    console.log(current_bid)
                     if(current_bid.status == "default"){
                         native_accessor.send_sms(json_message.messages[0].phone,"对不起，活动尚未开始！");
                     }

@@ -24,27 +24,22 @@ BidMessages.get_start_bid = function (){
 
 BidMessages.get_last_bid = function(){
     return  _.find(JSON.parse(localStorage.getItem("bid_infos")),function(bid_info){
-        console.log(bid_info.activity_name)
-        console.log(Activity.get_current_activity_name())
-        console.log(bid_info.bid_id)
-        console.log(Bid.get_current_bid_id())
-        console.log(bid_info.current_user)
         return bid_info.activity_name == Activity.get_current_activity_name() && bid_info.bid_id == Bid.get_current_bid_id() && bid_info.current_user==localStorage.current_user
     })
 }
 
 BidMessages.no_find_applied = function (json_message){
-    var phone = this.phone;
+    var phone = json_message.messages[0].phone;
     if(_.find(ApplyMessages.get_apply_messages(),function(received_message){
-        return received_message.phone == phone && received_message.activity_name == BidMessages.get_start_bid().activity_name &&received_message.current_user==localStorage.current_user
+        return received_message.phone == phone && received_message.activity_name == BidMessages.get_start_bid().activity_name && received_message.current_user==localStorage.current_user
     })){
         return false;
     }
     return true;
 }
 
-BidMessages.have_bid = function (json_message){
-    var phone = json_message.messages[0].phone;
+BidMessages.prototype.have_bid = function (){
+    var phone = this.phone;
     if(_.find(BidMessages.get_bid_messages(),function(bid_message){
         return bid_message.phone == phone && bid_message.activity_name== BidMessages.get_start_bid().activity_name &&bid_message.bid_id == BidMessages.get_start_bid().bid_id &&bid_message.current_user==localStorage.current_user
     })){
