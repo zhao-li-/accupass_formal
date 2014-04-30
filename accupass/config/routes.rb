@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/forget_third'=>'users#forget_third',:as => 'forget_third'
   post '/post_forget_third'=>'users#post_forget_third'
   post '/process_phone_login'=>'users#process_phone_login'
+  post '/process_activities_information'=>'users#process_activities_information'
 
   resource :users, only: [:create]
 

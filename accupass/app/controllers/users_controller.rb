@@ -1,6 +1,6 @@
 #encoding: utf-8
 class UsersController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => [:process_phone_login ]
+  skip_before_filter :verify_authenticity_token, :only => [:process_phone_login,:process_activities_information ]
   def welcome
     if !current_user
       redirect_to :login
@@ -118,5 +118,10 @@ class UsersController < ApplicationController
         format.json { render json: 'false' }
       end
     end
+  end
+
+  def process_activities_information
+    p "............................"
+    p params[:activities]
   end
 end

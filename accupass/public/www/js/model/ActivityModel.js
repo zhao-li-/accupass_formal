@@ -109,8 +109,6 @@ Activity.sort_activities = function(){
             return {"activity_name":key,"bid_counts":value.length}
         })
         .value()
-    console.log(sign_up_counts)
-    console.log(bid_counts)
     var activities = [];
     for (var i=0;i<sign_up_counts.length;i++){
 
@@ -127,17 +125,15 @@ Activity.sort_activities = function(){
 }
 
 Activity.post_activity_information = function (){
-    Activity.sort_activities();
-
-//        $.ajax({
-//            type: "POST",
-//            url: "/process_phone_data",
-//            data: {"activities":},
-//            success: function () {
-//                alert('同步成功！')
-//            },
-//            error: function () {
-//                alert('同步失败，请重新同步！')
-//            }
-//        });
+        $.ajax({
+            type: "POST",
+            url: "/process_activities_information",
+            data: {"activities":Activity.sort_activities()},
+            success: function () {
+                alert('同步成功！')
+            },
+            error: function () {
+                alert('同步失败，请重新同步！')
+            }
+        });
 }
