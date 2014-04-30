@@ -1,4 +1,4 @@
-function ActivityListController($scope,$navigate){
+function ActivityListController($scope,$navigate,$http){
     $scope.go_create=function(){
         $navigate.go('/create', 'slide', 'left');
     }
@@ -18,5 +18,8 @@ function ActivityListController($scope,$navigate){
     $scope.no_list();
     $scope.yellow_when_bidding = function(name){
         return  Activity.yellow_when_start_bidding(name);
+    }
+    $scope.post_data = function(){
+        Activity.post_activity_information();
     }
 }

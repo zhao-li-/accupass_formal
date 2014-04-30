@@ -85,3 +85,59 @@ Activity.filter_current_activity_apply_messages = function (){
         return received_message.activity_name == enter_into_it && received_message.current_user == localStorage.current_user;
     });
 }
+
+Activity.sort_activities = function(){
+    var sign_up_counts = _.chain(ApplyMessages.get_apply_messages())
+        .filter(function(sign_up){
+            return sign_up.current_user == localStorage.current_user
+        })
+        .groupBy(function(sign_up){
+            return sign_up.activity_name
+        })
+        .map(function(value,key){
+            return {"activity_name":key,"sign_up_counts":value.length}
+        })
+        .value()
+    var bid_counts = _.chain(Bid.get_bid_infos())
+        .filter(function(bid_message){
+            return bid_message.current_user == localStorage.current_user
+        })
+        .groupBy(function(bid_message){
+            return bid_message.activity_name
+        })
+        .map(function(value,key){
+            return {"activity_name":key,"bid_counts":value.length}
+        })
+        .value()
+    console.log(sign_up_counts)
+    console.log(bid_counts)
+    var activities = [];
+    for (var i=0;i<sign_up_counts.length;i++){
+
+        var bid = _.find(bid_counts,function(bid_count){
+            return bid_count.activity_name == sign_up_counts[i].activity_name
+        })
+        if (!bid){
+            bid ={"activity_name":sign_up_counts[i].activity_name,"bid_counts":0}
+        }
+        activity = {"activity_name":sign_up_counts[i].activity_name,"sign_up_counts":sign_up_counts[i].sign_up_counts,"bid_counts":bid.bid_counts}
+        activities.push(activity);
+    }
+    return activities
+}
+
+Activity.post_activity_information = function (){
+    Activity.sort_activities();
+
+//        $.ajax({
+//            type: "POST",
+//            url: "/process_phone_data",
+//            data: {"activities":},
+//            success: function () {
+//                alert('同步成功！')
+//            },
+//            error: function () {
+//                alert('同步失败，请重新同步！')
+//            }
+//        });
+}
