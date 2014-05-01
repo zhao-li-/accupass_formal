@@ -9,7 +9,7 @@
         报名列表
         %div(style="float:right" )
           %h5
-            =link_to "竞价列表"
+            =link_to "竞价列表",bid_list_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
   %table.table
     %thead
       %tr

@@ -1,0 +1,35 @@
+%ol.breadcrumb
+  %li
+    =link_to "首页",welcome_path
+  %li.active 竞价列表
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      %h4
+        竞价列表
+        %div(style="float:right" )
+          %h5
+            =link_to "报名列表",sign_up_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
+  %table.table
+    %thead
+      %tr
+        %th
+        %th 编号
+        %th 名称
+        %th
+        %th 参与人数
+    %tbody
+      -a = 1
+      -#- @sign_up_messages.each do |message|
+        %tr
+          %td
+          %td
+            =(@page_index.to_i - 1)*10 + a
+            - a+=1
+          %td
+            =message.user_name
+          %th
+          %td
+            =message.phone
+.text-right
+  -#= will_paginate @sign_up_messages, :previous_label=>'&laquo',:next_label=>'&raquo'

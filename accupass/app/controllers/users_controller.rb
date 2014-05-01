@@ -136,4 +136,8 @@ class UsersController < ApplicationController
     @page_index = params[:page] ||1
     @sign_up_messages = SignUpMessage.where(:activity_name=>params[:activity_name],:current_user => params[:current_user]).paginate(page: params[:page],per_page: 10)
   end
+
+  def bid_list
+    @
+  end
 end
