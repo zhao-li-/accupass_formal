@@ -7,6 +7,11 @@ class UsersController < ApplicationController
     elsif current_user.admin?
       redirect_to :manager_index
     end
+    p "........................,,,,,,,,,,,,,,,,,,,"
+    @page_index = params[:page] ||1
+    p Activity.find_by_user_name(current_user.user_name)
+    @activities = Activity.where(:user_name => current_user.user_name).paginate(page: params[:page],per_page: 10)
+    p @activities
   end
 
   def register
@@ -108,8 +113,6 @@ class UsersController < ApplicationController
   end
 
   def process_phone_login
-    p '..............................'
-    p params[:user_name]
     user = User.find_by_user_name(params[:user_name])
     respond_to do |format|
       if user && user.authenticate(params[:password])
@@ -122,6 +125,9 @@ class UsersController < ApplicationController
 
   def process_activities_information
     p "............................"
-    p params[:activities]
+    Activity.update_activities(params[:user_name],params[:activities])
+    respond_to do |format|
+      format.json { render json: 'true' }
+    end
   end
 end

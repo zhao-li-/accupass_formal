@@ -1,0 +1,28 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      活动信息
+  %table.table
+    %thead
+      %tr
+        %th
+        %th 编号
+        %th 活动名称
+        %th 报名人数
+        %th 竞价次数
+    %tbody
+      -a = 1
+      - @activities.each do |activity|
+        %tr
+          %td
+          %td
+            =(@page_index.to_i - 1)*10 + a
+            - a+=1
+          %td
+            =activity.activity_name
+          %th
+            =activity.sign_up_counts
+          %td
+            =activity.bid_counts
+.text-right
+  = will_paginate @activities, :previous_label=>'&laquo',:next_label=>'&raquo'

@@ -87,7 +87,7 @@ Activity.filter_current_activity_apply_messages = function (){
 }
 
 Activity.sort_activities = function(){
-    var sign_up_counts = _.chain(ApplyMessages.get_apply_messages())
+    var sign_up_counts_messages = _.chain(ApplyMessages.get_apply_messages())
         .filter(function(sign_up){
             return sign_up.current_user == localStorage.current_user
         })
@@ -98,6 +98,12 @@ Activity.sort_activities = function(){
             return {"activity_name":key,"sign_up_counts":value.length}
         })
         .value()
+    var activities = Activity.get_activities()
+    var sign_up_counts = _.map(activities,function(activity){
+        return _.find(sign_up_counts_messages,function(sign_up_count){
+           return sign_up_count.activity_name ==activity.name
+        }) ||{"activity_name":activity.name,"sign_up_counts":0}
+    })
     var bid_counts = _.chain(Bid.get_bid_infos())
         .filter(function(bid_message){
             return bid_message.current_user == localStorage.current_user
@@ -118,7 +124,7 @@ Activity.sort_activities = function(){
         if (!bid){
             bid ={"activity_name":sign_up_counts[i].activity_name,"bid_counts":0}
         }
-        activity = {"activity_name":sign_up_counts[i].activity_name,"sign_up_counts":sign_up_counts[i].sign_up_counts,"bid_counts":bid.bid_counts}
+        activity = {"activity_name":sign_up_counts[i].activity_name,"sign_up_counts":sign_up_counts[i].sign_up_counts,"bid_counts":bid.bid_counts,"user_name":localStorage.current_user}
         activities.push(activity);
     }
     return activities
@@ -128,7 +134,8 @@ Activity.post_activity_information = function (){
         $.ajax({
             type: "POST",
             url: "/process_activities_information",
-            data: {"activities":Activity.sort_activities()},
+            data: {"user_name":localStorage.current_user,
+                   "activities":Activity.sort_activities()},
             success: function () {
                 alert('同步成功！')
             },
