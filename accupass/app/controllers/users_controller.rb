@@ -4,14 +4,13 @@ class UsersController < ApplicationController
   def welcome
     if !current_user
       redirect_to :login
-    elsif current_user.admin?
-      redirect_to :manager_index
     end
-    p "........................,,,,,,,,,,,,,,,,,,,"
     @page_index = params[:page] ||1
-    p Activity.find_by_user_name(current_user.user_name)
-    @activities = Activity.where(:user_name => current_user.user_name).paginate(page: params[:page],per_page: 10)
-    p @activities
+    if params[:user_name]
+      @activities = Activity.where(:user_name => params[:user_name]).paginate(page: params[:page],per_page: 10)
+    else
+      @activities = Activity.where(:user_name => current_user.user_name).paginate(page: params[:page],per_page: 10)
+    end
   end
 
   def register
@@ -124,10 +123,13 @@ class UsersController < ApplicationController
   end
 
   def process_activities_information
-    p "............................"
     Activity.update_activities(params[:user_name],params[:activities])
     respond_to do |format|
       format.json { render json: 'true' }
     end
+  end
+
+  def sign_up
+    p "....................;;;;;;;;;;;;;"
   end
 end

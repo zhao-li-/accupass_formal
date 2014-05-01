@@ -1,4 +1,4 @@
-function ActivityListController($scope,$navigate,$http){
+function ActivityListController($scope,$navigate){
     $scope.go_create=function(){
         $navigate.go('/create', 'slide', 'left');
     }

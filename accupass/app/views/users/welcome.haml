@@ -21,7 +21,7 @@
           %td
             =activity.activity_name
           %th
-            =activity.sign_up_counts
+            =link_to activity.sign_up_counts,sign_up_path(:activity_name =>activity.activity_name)
           %td
             =activity.bid_counts
 .text-right

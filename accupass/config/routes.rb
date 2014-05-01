@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post '/post_forget_third'=>'users#post_forget_third'
   post '/process_phone_login'=>'users#process_phone_login'
   post '/process_activities_information'=>'users#process_activities_information'
+  get '/sign_up'=>'users#sign_up', :as =>'sign_up'
 
   resource :users, only: [:create]
 
