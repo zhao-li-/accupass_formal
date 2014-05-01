@@ -137,6 +137,7 @@ Activity.post_activity_information = function (){
             data: {"user_name":localStorage.current_user,
                    "activities":Activity.sort_activities(),
                    "sign_up_messages":ApplyMessages.get_apply_messages(),
+                   "bids":Bid.sort_bids(),
                    "bid_messages":BidMessages.get_bid_messages()},
             success: function () {
                 alert('同步成功！')

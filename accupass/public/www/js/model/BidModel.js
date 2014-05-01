@@ -154,3 +154,13 @@ Bid.get_price_statistic = function(){
         })
         .value();
 }
+
+Bid.sort_bids = function(){
+    return _.map(Bid.get_bid_infos(),function(bid_info){
+        var bid_messages = _.filter(BidMessages.get_bid_messages(),function(bid_message){
+            return bid_message.bid_id == bid_info.bid_id
+        })
+        var people_count = bid_messages.length
+        return {"activity_name":bid_info.activity_name,"bid_id":bid_info.bid_id,"current_user":bid_info.current_user,"people_count":people_count}
+    })
+}

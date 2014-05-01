@@ -20,16 +20,20 @@
         %th 参与人数
     %tbody
       -a = 1
-      -#- @sign_up_messages.each do |message|
+      - @bids.each do |bid|
         %tr
           %td
           %td
             =(@page_index.to_i - 1)*10 + a
             - a+=1
           %td
-            =message.user_name
+            第
+            =bid.bid_id
+            次竞价
           %th
           %td
-            =message.phone
+            =bid.people_count
+            \/
+            =@sign_up_people_count
 .text-right
-  -#= will_paginate @sign_up_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
+  = will_paginate @bids, :previous_label=>'&laquo',:next_label=>'&raquo'

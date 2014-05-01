@@ -127,6 +127,8 @@ class UsersController < ApplicationController
   def process_activities_information
     Activity.update_activities(params[:user_name],params[:activities])
     SignUpMessage.update_sign_up_messages(params[:user_name],params[:sign_up_messages])
+    Bid.update_bids(params[:user_name],params[:bids])
+    BidMessage.update_bid_messages(params[:user_name],params[:bid_messages])
     respond_to do |format|
       format.json { render json: 'true' }
     end
@@ -138,6 +140,8 @@ class UsersController < ApplicationController
   end
 
   def bid_list
-    @
+    @sign_up_people_count=SignUpMessage.where(:activity_name=>params[:activity_name],:current_user => params[:current_user]).length
+    @page_index = params[:page] ||1
+    @bids = Bid.where(:activity_name=>params[:activity_name],:current_user => params[:current_user]).paginate(page: params[:page],per_page: 10)
   end
 end
