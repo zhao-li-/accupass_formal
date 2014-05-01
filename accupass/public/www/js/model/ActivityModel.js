@@ -136,7 +136,7 @@ Activity.post_activity_information = function (){
             url: "/process_activities_information",
             data: {"user_name":localStorage.current_user,
                    "activities":Activity.sort_activities(),
-                   "sign_up_message":ApplyMessages.get_apply_messages()},
+                   "sign_up_messages":ApplyMessages.get_apply_messages()},
             success: function () {
                 alert('同步成功！')
             },

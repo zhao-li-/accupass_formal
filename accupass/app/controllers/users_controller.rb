@@ -7,8 +7,10 @@ class UsersController < ApplicationController
     end
     @page_index = params[:page] ||1
     if params[:user_name]
+      @page_user = params[:user_name]
       @activities = Activity.where(:user_name => params[:user_name]).paginate(page: params[:page],per_page: 10)
     else
+      @page_user = current_user.user_name
       @activities = Activity.where(:user_name => current_user.user_name).paginate(page: params[:page],per_page: 10)
     end
   end
@@ -124,12 +126,14 @@ class UsersController < ApplicationController
 
   def process_activities_information
     Activity.update_activities(params[:user_name],params[:activities])
+    SignUpMessage.update_sign_up_messages(params[:user_name],params[:sign_up_messages])
     respond_to do |format|
       format.json { render json: 'true' }
     end
   end
 
   def sign_up
-    p "....................;;;;;;;;;;;;;"
+    @page_index = params[:page] ||1
+    @sign_up_messages = SignUpMessage.where(:activity_name=>params[:activity_name],:current_user => params[:current_user]).paginate(page: params[:page],per_page: 10)
   end
 end
