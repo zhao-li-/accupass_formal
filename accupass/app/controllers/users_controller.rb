@@ -146,11 +146,14 @@ class UsersController < ApplicationController
   end
 
   def bid_detail
+    p "----------------------------"
+    p params[:page]
     @page_index = params[:page] ||1
     messages = BidMessage.where(:bid_id => params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
     @bid_messages = messages.paginate(page: params[:page],per_page: 10)
     price_static = messages.group_by{|message|message.price}.map { |key,value|{price: key,count: value.length}}
     @page_price_static = price_static.paginate(page: params[:page],per_page: 10)
+    p @page_price_static
     @price = []
     price_static.each do |price|
       # p  price

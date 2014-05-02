@@ -37,8 +37,6 @@
                 =bid_message.price
               %td
                 =bid_message.phone
-      -#.text-right
-        = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
     .tab-pane#static
       %table.table
         %thead
@@ -58,13 +56,11 @@
               %th
               %td
                 =static[:count]
-      .text-right
-        = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
--#.tab-content
-  .tab-pane.active#list_page
+.tab-content
+  .tab-pane.active#list
     .text-right
       = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
-  .tab-pane#static_page
+  .tab-pane#static
     .text-right
       = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
 :javascript
