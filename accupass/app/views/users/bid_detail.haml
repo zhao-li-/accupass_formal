@@ -47,7 +47,7 @@
             %th
             %th 人数
         %tbody
-          - @price_static.each do |static|
+          - @page_price_static.each do |static|
             %tr
               %td
               %td
@@ -56,10 +56,11 @@
               %th
               %td
                 =static[:count]
-.text-right
-  = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
+-#.text-right#list_page
+-#  = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
+.text-right#static_page
+  = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
   :javascript
-    $
     $('#myTab a').click(function (e) {
       e.preventDefault()
       $(this).tab('show')
