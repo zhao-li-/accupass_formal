@@ -14,52 +14,48 @@
     %li
       %a{:href => "#"} 价格统计
   .tab-content
-    .tab-pane.active#list
+    -#.tab-pane.active#list
+    -#  %table.table
+    -#    %thead
+    -#      %tr
+    -#        %th
+    -#        %th 编号
+    -#        %th 姓名
+    -#        %th 价格/元
+    -#        %th 手机号
+    -#    %tbody
+    -#      -a = 1
+    -#      - @bid_messages.each do |bid_message|
+    -#        %tr
+    -#          %td
+    -#          %td
+    -#            =(@page_index.to_i - 1)*10 + a
+    -#            - a+=1
+    -#          %td
+    -#            =bid_message.user_name
+    -#          %th
+    -#            =bid_message.price
+    -#          %td
+    -#            =bid_message.phone
+    .tab-pane.active#static
       %table.table
         %thead
           %tr
             %th
-            %th 编号
-            %th 姓名
-            %th 价格/元
-            %th 手机号
-        %tbody
-          -a = 1
-          - @bid_messages.each do |bid_message|
-            %tr
-              %td
-              %td
-                =(@page_index.to_i - 1)*10 + a
-                - a+=1
-              %td
-                =bid_message.user_name
-              %th
-                =bid_message.price
-              %td
-                =bid_message.phone
-    .tab-pane#static
-      %table.table
-        %thead
-          %tr
             %th
-            %th 编号
-            %th 姓名
             %th 价格/元
-            %th 手机号
+            %th
+            %th 人数
         %tbody
-          -a = 1
-          -#- @bid_messages.each do |bid_message|
+          - @price_static.each do |static|
             %tr
               %td
               %td
-                =(@page_index.to_i - 1)*10 + a
-                - a+=1
               %td
-                =bid_message.user_name
+                =static[:price]
               %th
-                =bid_message.price
               %td
-                =bid_message.phone
+                =static[:count]
 .text-right
   = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
   :javascript
@@ -67,6 +63,6 @@
     $('#myTab a').click(function (e) {
       e.preventDefault()
       $(this).tab('show')
-      $('#list').tab('show')
+      //$('#list').tab('show')
       //$('#myTab a:last').tab('show')
     })
