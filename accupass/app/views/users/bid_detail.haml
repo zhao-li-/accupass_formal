@@ -7,12 +7,23 @@
     第
     =params[:bid_id]
     次竞价
+.winner
+  %p
+    获胜者：
+    =@winner_info.user_name
+  %p
+    出价：
+    =@winner_info.price
+    元
+  %p
+    手机号：
+    =@winner_info.phone
 .panel.panel-default
   %ul.nav.nav-tabs.nav-justified#myTab
     %li.active
-      %a{:href => "#list" } 出价列表
-    %li
-      %a{:href => "#static"} 价格统计
+      %a#click_list{:href => "#list" } 出价列表
+    %li#click_static
+      %a#click_static{:href => "#static"} 价格统计
   .tab-content
     .tab-pane.active#list
       %table.table
@@ -56,13 +67,14 @@
               %th
               %td
                 =static[:count]
-.tab-content
-  .tab-pane.active#list
-    .text-right
-      = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
-  .tab-pane#static
-    .text-right
-      = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
+#list_page
+  .text-right
+    llllllll
+    = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
+#static_page(style="display:none" )
+  .text-right
+    kkkkkkkkkkk
+    = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
 :javascript
   $('#myTab a').click(function (e) {
     e.preventDefault()
@@ -70,3 +82,7 @@
     //$('#list').tab('show')
     //$('#myTab a:last').tab('show')
   })
+  //$('#click_list').click(function(){
+  //    $('#list_page').show()
+  //    $('static_page').hide()
+  //})

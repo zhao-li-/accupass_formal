@@ -24,3 +24,12 @@ a:hover {
     background-color: #eee;
     text-align: left;
 }
+.winner{
+    padding-bottom: 30px;
+    padding-top: 30px;
+    text-align: center;
+    width: 100%;
+    background-color: #EEEEEE;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
