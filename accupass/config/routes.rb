@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get '/sign_up'=>'users#sign_up', :as =>'sign_up'
   get '/bid_list'=>'users#bid_list', :as =>'bid_list'
   get '/bid_detail'=>'users#bid_detail',:as=>'bid_detail'
+  get '/show'=>'users#show'
+  get '/price_static'=>'users#price_static',:as=>'price_static'
 
   resource :users, only: [:create]
 
