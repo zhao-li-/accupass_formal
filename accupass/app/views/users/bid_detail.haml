@@ -8,6 +8,8 @@
     =params[:bid_id]
     次竞价
 .winner
+  -if flash.now[:bidding]
+    活动正在进行中...
   -if flash.now[:winner]
     %p
       获胜者：

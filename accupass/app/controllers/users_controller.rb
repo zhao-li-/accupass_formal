@@ -146,25 +146,21 @@ class UsersController < ApplicationController
   end
 
   def bid_detail
-    p "----------------------------"
     @page_index = params[:page] ||1
     messages = BidMessage.where(:bid_id => params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
     @bid_messages = messages.paginate(page: params[:page],per_page: 10)
     price_static = messages.group_by{|message|message.price}.map { |key,value|{price: key,count: value.length}}
     @page_price_static = price_static.paginate(page: params[:page],per_page: 10)
     winner = price_static.sort_by { |static|static[:price].to_i}.find{|static|static[:count] == 1}
-    p winner
-    if winner
-      p"==============="
-      p winner
+    bid = Bid.where(:bid_id => params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
+    if bid[0][:status]=="start"
+      flash.now[:bidding]="true"
+    elsif winner
       @winner_info = BidMessage.find_by_price(winner[:price])
       flash.now[:winner]="true"
-    end
-    if !winner
-      p "____________________________________"
+    else
       flash.now[:no_winner]="true"
     end
-    p @winner_info
   end
 
 end
