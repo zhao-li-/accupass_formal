@@ -23,6 +23,6 @@
           %th
             =link_to activity.sign_up_counts,sign_up_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
           %td
-            =link_to activity.bid_counts,bid_list_path
+            =link_to activity.bid_counts,bid_list_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
 .text-right
   = will_paginate @activities, :previous_label=>'&laquo',:next_label=>'&raquo'

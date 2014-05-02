@@ -27,9 +27,7 @@
             =(@page_index.to_i - 1)*10 + a
             - a+=1
           %td
-            第
-            =bid.bid_id
-            次竞价
+            =link_to "第" + bid.bid_id + "次竞价",bid_detail_path(:bid_id=>bid.bid_id,:activity_name=>params[:activity_name],:current_user => params[:current_user])
           %th
           %td
             =bid.people_count
