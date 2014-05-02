@@ -8,16 +8,19 @@
     =params[:bid_id]
     次竞价
 .winner
-  %p
-    获胜者：
-    =@winner_info.user_name
-  %p
-    出价：
-    =@winner_info.price
-    元
-  %p
-    手机号：
-    =@winner_info.phone
+  -if flash.now[:winner]
+    %p
+      获胜者：
+      =@winner_info.user_name
+    %p
+      出价：
+      =@winner_info.price
+      元
+    %p
+      手机号：
+      =@winner_info.phone
+  -if flash.now[:no_winner]
+    本次竞价无人胜出
 .panel.panel-default
   %ul.nav.nav-tabs.nav-justified#myTab
     %li.active

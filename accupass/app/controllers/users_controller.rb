@@ -154,7 +154,16 @@ class UsersController < ApplicationController
     @page_price_static = price_static.paginate(page: params[:page],per_page: 10)
     winner = price_static.sort_by { |static|static[:price].to_i}.find{|static|static[:count] == 1}
     p winner
-    @winner_info = BidMessage.find_by_price(winner[:price])
+    if winner
+      p"==============="
+      p winner
+      @winner_info = BidMessage.find_by_price(winner[:price])
+      flash.now[:winner]="true"
+    end
+    if !winner
+      p "____________________________________"
+      flash.now[:no_winner]="true"
+    end
     p @winner_info
   end
 
