@@ -1,6 +1,6 @@
 %ol.breadcrumb
   %li
-    =link_to "首页",welcome_path
+    =link_to "首页",welcome_path(:user_name => params[:current_user])
   %li
     =link_to "竞价列表",bid_list_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
   %li.active

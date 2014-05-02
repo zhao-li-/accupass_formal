@@ -2,6 +2,9 @@
   .panel-heading
     %h3.panel-title
       活动信息
+      .text-right
+        %button.btn.btn-default
+          =link_to "同步展示"
   %table.table
     %thead
       %tr
@@ -19,10 +22,10 @@
             =(@page_index.to_i - 1)*10 + a
             - a+=1
           %td
-            =activity.activity_name
+            =link_to activity.activity_name,bid_list_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
           %th
             =link_to activity.sign_up_counts,sign_up_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
           %td
             =link_to activity.bid_counts,bid_list_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
-.text-right
+.text-right(style="margin-top:-40px" )
   = will_paginate @activities, :previous_label=>'&laquo',:next_label=>'&raquo'

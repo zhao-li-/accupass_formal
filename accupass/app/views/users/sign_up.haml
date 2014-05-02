@@ -1,6 +1,6 @@
 %ol.breadcrumb
   %li
-    =link_to "首页",welcome_path
+    =link_to "首页",welcome_path(:user_name => params[:current_user])
   %li.active 报名列表
 .panel.panel-default
   .panel-heading
@@ -31,5 +31,5 @@
           %th
           %td
             =message.phone
-.text-right
+.text-right(style="margin-top:-40px" )
   = will_paginate @sign_up_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
