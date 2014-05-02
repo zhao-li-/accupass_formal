@@ -12,32 +12,34 @@
     %li.active
       %a{:href => "#list" } 出价列表
     %li
-      %a{:href => "#"} 价格统计
+      %a{:href => "#static"} 价格统计
   .tab-content
-    -#.tab-pane.active#list
-    -#  %table.table
-    -#    %thead
-    -#      %tr
-    -#        %th
-    -#        %th 编号
-    -#        %th 姓名
-    -#        %th 价格/元
-    -#        %th 手机号
-    -#    %tbody
-    -#      -a = 1
-    -#      - @bid_messages.each do |bid_message|
-    -#        %tr
-    -#          %td
-    -#          %td
-    -#            =(@page_index.to_i - 1)*10 + a
-    -#            - a+=1
-    -#          %td
-    -#            =bid_message.user_name
-    -#          %th
-    -#            =bid_message.price
-    -#          %td
-    -#            =bid_message.phone
-    .tab-pane.active#static
+    .tab-pane.active#list
+      %table.table
+        %thead
+          %tr
+            %th
+            %th 编号
+            %th 姓名
+            %th 价格/元
+            %th 手机号
+        %tbody
+          -a = 1
+          - @bid_messages.each do |bid_message|
+            %tr
+              %td
+              %td
+                =(@page_index.to_i - 1)*10 + a
+                - a+=1
+              %td
+                =bid_message.user_name
+              %th
+                =bid_message.price
+              %td
+                =bid_message.phone
+      -#.text-right
+        = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
+    .tab-pane#static
       %table.table
         %thead
           %tr
@@ -56,14 +58,19 @@
               %th
               %td
                 =static[:count]
--#.text-right#list_page
--#  = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
-.text-right#static_page
-  = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
-  :javascript
-    $('#myTab a').click(function (e) {
-      e.preventDefault()
-      $(this).tab('show')
-      //$('#list').tab('show')
-      //$('#myTab a:last').tab('show')
-    })
+      .text-right
+        = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
+-#.tab-content
+  .tab-pane.active#list_page
+    .text-right
+      = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
+  .tab-pane#static_page
+    .text-right
+      = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
+:javascript
+  $('#myTab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+    //$('#list').tab('show')
+    //$('#myTab a:last').tab('show')
+  })

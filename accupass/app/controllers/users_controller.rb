@@ -149,14 +149,7 @@ class UsersController < ApplicationController
     @page_index = params[:page] ||1
     messages = BidMessage.where(:bid_id => params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
     @bid_messages = messages.paginate(page: params[:page],per_page: 10)
-    p "---------------------------------------------------"
-    # p @bid_messages
-    # BidMessage.where(:bid_id => params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
     price_static = messages.group_by{|message|message.price}.map { |key,value|{price: key,count: value.length}}
-    p"===============here========================="
-    p price_static
-    p @bid_messages
-    p ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
     @page_price_static = price_static.paginate(page: params[:page],per_page: 10)
     @price = []
     price_static.each do |price|
@@ -165,12 +158,6 @@ class UsersController < ApplicationController
         @price.push(price)
       end
     end
-    p"===================================================="
-    p @price_static
-    # @winner = @price_static.
-    p "---------------------------------------------------------"
-    p @price
-
   end
 
 end
