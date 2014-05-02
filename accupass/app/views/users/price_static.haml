@@ -23,31 +23,23 @@
       =@winner_info.phone
   -if flash.now[:no_winner]
     本次竞价无人胜出
-.panel.panel-default
-  %ul.nav.nav-tabs.nav-justified#myTab
+.panel.panel-default.text-center
+  %ul.nav.nav-tabs.nav-justified
     %li
       =link_to "出价列表",bid_detail_path(:bid_id=>params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
     %li.active
       =link_to "价格统计"
-  .tab-content
-    .tab-pane.active
-      %table.table
-        %thead
-          %tr
-            %th
-            %th
-            %th 价格/元
-            %th
-            %th 人数
-        %tbody
-          - @page_price_static.each do |static|
-            %tr
-              %td
-              %td
-              %td
-                =static[:price]
-              %th
-              %td
-                =static[:count]
+  %table.table
+    %thead
+      %tr
+        %th.text-center 价格/元
+        %th.text-center 人数
+    %tbody
+      - @page_price_static.each do |static|
+        %tr
+          %td
+            =static[:price]
+          %td
+            =static[:count]
 .text-right
   = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
