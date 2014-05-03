@@ -1,0 +1,7 @@
+%tbody#bidding_messages
+  - @bid_messages.each do |message|
+    %tr
+      %th.text-center
+        =message.user_name
+      %th.text-center
+        =message.phone

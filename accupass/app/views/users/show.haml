@@ -14,11 +14,5 @@
           姓名
         %th.text-center
           电话
-    %tbody
-      - @bid_messages.each do |message|
-        %tr
-          %th.text-center
-            =message.user_name
-          %th.text-center
-            =message.phone
+    =render 'shared/bid_messages'
 
