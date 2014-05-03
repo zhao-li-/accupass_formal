@@ -1,31 +1,33 @@
-.panel.panel-default
-  .panel-heading
-    .panel-title
-      %h4
-        活动信息
-        %button.btn.btn-default(style="margin-top: -10px;float:right" )
-          =link_to "同步展示",:show
-  %table.table
-    %thead
-      %tr
-        %th
-        %th 编号
-        %th 活动名称
-        %th 报名人数
-        %th 竞价次数
-    %tbody
-      -a = 1
-      - @activities.each do |activity|
+=render "shared/header"
+.body
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        %h4
+          活动信息
+          %button.btn.btn-default(style="margin-top: -10px;float:right" )
+            =link_to "同步展示",:show
+    %table.table
+      %thead
         %tr
-          %td
-          %td
-            =(@page_index.to_i - 1)*10 + a
-            - a+=1
-          %td
-            =link_to activity.activity_name,bid_list_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
           %th
-            =link_to activity.sign_up_counts,sign_up_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
-          %td
-            =link_to activity.bid_counts,bid_list_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
-.text-right(style="margin-top:-40px" )
-  = will_paginate @activities, :previous_label=>'&laquo',:next_label=>'&raquo'
+          %th 编号
+          %th 活动名称
+          %th 报名人数
+          %th 竞价次数
+      %tbody
+        -a = 1
+        - @activities.each do |activity|
+          %tr
+            %td
+            %td
+              =(@page_index.to_i - 1)*10 + a
+              - a+=1
+            %td
+              =link_to activity.activity_name,bid_list_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
+            %th
+              =link_to activity.sign_up_counts,sign_up_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
+            %td
+              =link_to activity.bid_counts,bid_list_path(:activity_name =>activity.activity_name,:current_user=>@page_user)
+  .text-right(style="margin-top:-40px" )
+    = will_paginate @activities, :previous_label=>'&laquo',:next_label=>'&raquo'

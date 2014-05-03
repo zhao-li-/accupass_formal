@@ -1,35 +1,37 @@
-%ol.breadcrumb
-  %li
-    =link_to "首页",welcome_path(:user_name => params[:current_user])
-  %li.active 报名列表
-.panel.panel-default
-  .panel-heading
-    .panel-title
-      %h4
-        报名列表
-        %div(style="float:right" )
-          %h5
-            =link_to "竞价列表",bid_list_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
-  %table.table
-    %thead
-      %tr
-        %th
-        %th 编号
-        %th 姓名
-        %th
-        %th 手机号
-    %tbody
-      -a = 1
-      - @sign_up_messages.each do |message|
+=render "shared/header"
+.body
+  %ol.breadcrumb
+    %li
+      =link_to "首页",welcome_path(:user_name => params[:current_user])
+    %li.active 报名列表
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        %h4
+          报名列表
+          %div(style="float:right" )
+            %h5
+              =link_to "竞价列表",bid_list_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
+    %table.table
+      %thead
         %tr
-          %td
-          %td
-            =(@page_index.to_i - 1)*10 + a
-            - a+=1
-          %td
-            =message.user_name
           %th
-          %td
-            =message.phone
-.text-right(style="margin-top:-40px" )
-  = will_paginate @sign_up_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
+          %th 编号
+          %th 姓名
+          %th
+          %th 手机号
+      %tbody
+        -a = 1
+        - @sign_up_messages.each do |message|
+          %tr
+            %td
+            %td
+              =(@page_index.to_i - 1)*10 + a
+              - a+=1
+            %td
+              =message.user_name
+            %th
+            %td
+              =message.phone
+  .text-right(style="margin-top:-40px" )
+    = will_paginate @sign_up_messages, :previous_label=>'&laquo',:next_label=>'&raquo'

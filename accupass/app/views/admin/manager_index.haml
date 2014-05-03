@@ -1,30 +1,32 @@
-.panel.panel-default
-  .panel-heading
-    %h3.panel-title
-      用户管理
-      %button.btn.btn-default(style="margin-left:25px" )
-        =link_to "+添加用户",add_user_path
-  %table.table
-    %thead
-      %tr
-        %th
-        %th 编号
-        %th 用户名
-        %th
-        %th 操作
-    %tbody
-      -a = 1
-      - @users.each do |user|
+=render "shared/header"
+.body
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title
+        用户管理
+        %button.btn.btn-default(style="margin-left:25px" )
+          =link_to "+添加用户",add_user_path
+    %table.table
+      %thead
         %tr
-          %td
-          %td
-            =(@page_index.to_i - 1)*10 + a
-            - a+=1
-          %td
-            =link_to user.user_name,welcome_path(:user_name => user.user_name)
           %th
-          %td
-            =link_to "删除", del_user_path(:user_name=>user[:user_name]),data: { confirm: "您确定要删除"+user[:user_name]+"？"},:method => :delete
-            =link_to "修改密码",change_password_path(:user_name => user[:user_name])
-.text-right
-  = will_paginate @users, :previous_label=>'&laquo',:next_label=>'&raquo'
+          %th 编号
+          %th 用户名
+          %th
+          %th 操作
+      %tbody
+        -a = 1
+        - @users.each do |user|
+          %tr
+            %td
+            %td
+              =(@page_index.to_i - 1)*10 + a
+              - a+=1
+            %td
+              =link_to user.user_name,welcome_path(:user_name => user.user_name)
+            %th
+            %td
+              =link_to "删除", del_user_path(:user_name=>user[:user_name]),data: { confirm: "您确定要删除"+user[:user_name]+"？"},:method => :delete
+              =link_to "修改密码",change_password_path(:user_name => user[:user_name])
+  .text-right
+    = will_paginate @users, :previous_label=>'&laquo',:next_label=>'&raquo'

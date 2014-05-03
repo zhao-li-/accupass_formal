@@ -6,6 +6,5 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body(style="padding:5px 60px" )
-    =render "shared/header"
-    %div(style="margin-top:85px" )
+    %div
       = yield

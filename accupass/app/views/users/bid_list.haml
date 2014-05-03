@@ -1,37 +1,39 @@
-%ol.breadcrumb
-  %li
-    =link_to "首页",welcome_path(:user_name => params[:current_user])
-  %li.active 竞价列表
-.panel.panel-default
-  .panel-heading
-    .panel-title
-      %h4
-        竞价列表
-        %div(style="float:right" )
-          %h5
-            =link_to "报名列表",sign_up_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
-  %table.table
-    %thead
-      %tr
-        %th
-        %th 编号
-        %th 名称
-        %th
-        %th 参与人数
-    %tbody
-      -a = 1
-      - @bids.each do |bid|
+=render "shared/header"
+.body
+  %ol.breadcrumb
+    %li
+      =link_to "首页",welcome_path(:user_name => params[:current_user])
+    %li.active 竞价列表
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        %h4
+          竞价列表
+          %div(style="float:right" )
+            %h5
+              =link_to "报名列表",sign_up_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
+    %table.table
+      %thead
         %tr
-          %td
-          %td
-            =(@page_index.to_i - 1)*10 + a
-            - a+=1
-          %td
-            =link_to "第" + bid.bid_id + "次竞价",bid_detail_path(:bid_id=>bid.bid_id,:activity_name=>params[:activity_name],:current_user => params[:current_user])
           %th
-          %td
-            =bid.people_count
-            \/
-            =@sign_up_people_count
-.text-right(style="margin-top:-40px" )
-  = will_paginate @bids, :previous_label=>'&laquo',:next_label=>'&raquo'
+          %th 编号
+          %th 名称
+          %th
+          %th 参与人数
+      %tbody
+        -a = 1
+        - @bids.each do |bid|
+          %tr
+            %td
+            %td
+              =(@page_index.to_i - 1)*10 + a
+              - a+=1
+            %td
+              =link_to "第" + bid.bid_id + "次竞价",bid_detail_path(:bid_id=>bid.bid_id,:activity_name=>params[:activity_name],:current_user => params[:current_user])
+            %th
+            %td
+              =bid.people_count
+              \/
+              =@sign_up_people_count
+  .text-right(style="margin-top:-40px" )
+    = will_paginate @bids, :previous_label=>'&laquo',:next_label=>'&raquo'

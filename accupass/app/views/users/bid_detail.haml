@@ -1,58 +1,60 @@
-%ol.breadcrumb
-  %li
-    =link_to "首页",welcome_path(:user_name => params[:current_user])
-  %li
-    =link_to "竞价列表",bid_list_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
-  %li.active
-    第
-    =params[:bid_id]
-    次竞价
-.winner
-  -if flash.now[:bidding]
-    活动正在进行中...
-  -if flash.now[:winner]
-    %p
-      获胜者：
-      =@winner_info.user_name
-    %p
-      出价：
-      =@winner_info.price
-      元
-    %p
-      手机号：
-      =@winner_info.phone
-  -if flash.now[:no_winner]
-    本次竞价无人胜出
-.panel.panel-default
-  %ul.nav.nav-tabs.nav-justified
-    %li.active
-      %a
-        出价列表
+=render "shared/header"
+.body
+  %ol.breadcrumb
     %li
-      =link_to "价格统计",price_static_path(:bid_id=>params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
-  .tab-content
-    .tab-pane.active
-      %table.table
-        %thead
-          %tr
-            %th
-            %th 编号
-            %th 姓名
-            %th 价格/元
-            %th 手机号
-        %tbody
-          -a = 1
-          - @bid_messages.each do |bid_message|
+      =link_to "首页",welcome_path(:user_name => params[:current_user])
+    %li
+      =link_to "竞价列表",bid_list_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
+    %li.active
+      第
+      =params[:bid_id]
+      次竞价
+  .winner
+    -if flash.now[:bidding]
+      活动正在进行中...
+    -if flash.now[:winner]
+      %p
+        获胜者：
+        =@winner_info.user_name
+      %p
+        出价：
+        =@winner_info.price
+        元
+      %p
+        手机号：
+        =@winner_info.phone
+    -if flash.now[:no_winner]
+      本次竞价无人胜出
+  .panel.panel-default
+    %ul.nav.nav-tabs.nav-justified
+      %li.active
+        %a
+          出价列表
+      %li
+        =link_to "价格统计",price_static_path(:bid_id=>params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
+    .tab-content
+      .tab-pane.active
+        %table.table
+          %thead
             %tr
-              %td
-              %td
-                =(@page_index.to_i - 1)*10 + a
-                - a+=1
-              %td
-                =bid_message.user_name
               %th
-                =bid_message.price
-              %td
-                =bid_message.phone
-.text-right(style="margin-top:-40px" )
-  = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'
+              %th 编号
+              %th 姓名
+              %th 价格/元
+              %th 手机号
+          %tbody
+            -a = 1
+            - @bid_messages.each do |bid_message|
+              %tr
+                %td
+                %td
+                  =(@page_index.to_i - 1)*10 + a
+                  - a+=1
+                %td
+                  =bid_message.user_name
+                %th
+                  =bid_message.price
+                %td
+                  =bid_message.phone
+  .text-right(style="margin-top:-40px" )
+    = will_paginate @bid_messages, :previous_label=>'&laquo',:next_label=>'&raquo'

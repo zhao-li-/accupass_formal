@@ -1,45 +1,47 @@
-%ol.breadcrumb
-  %li
-    =link_to "首页",welcome_path(:user_name => params[:current_user])
-  %li
-    =link_to "竞价列表",bid_list_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
-  %li.active
-    第
-    =params[:bid_id]
-    次竞价
-.winner
-  -if flash.now[:bidding]
-    活动正在进行中...
-  -if flash.now[:winner]
-    %p
-      获胜者：
-      =@winner_info.user_name
-    %p
-      出价：
-      =@winner_info.price
-      元
-    %p
-      手机号：
-      =@winner_info.phone
-  -if flash.now[:no_winner]
-    本次竞价无人胜出
-.panel.panel-default.text-center
-  %ul.nav.nav-tabs.nav-justified
+=render "shared/header"
+.body
+  %ol.breadcrumb
     %li
-      =link_to "出价列表",bid_detail_path(:bid_id=>params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
+      =link_to "首页",welcome_path(:user_name => params[:current_user])
+    %li
+      =link_to "竞价列表",bid_list_path(:activity_name=>params[:activity_name],:current_user => params[:current_user])
     %li.active
-      =link_to "价格统计"
-  %table.table
-    %thead
-      %tr
-        %th.text-center 价格/元
-        %th.text-center 人数
-    %tbody
-      - @page_price_static.each do |static|
+      第
+      =params[:bid_id]
+      次竞价
+  .winner
+    -if flash.now[:bidding]
+      活动正在进行中...
+    -if flash.now[:winner]
+      %p
+        获胜者：
+        =@winner_info.user_name
+      %p
+        出价：
+        =@winner_info.price
+        元
+      %p
+        手机号：
+        =@winner_info.phone
+    -if flash.now[:no_winner]
+      本次竞价无人胜出
+  .panel.panel-default.text-center
+    %ul.nav.nav-tabs.nav-justified
+      %li
+        =link_to "出价列表",bid_detail_path(:bid_id=>params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
+      %li.active
+        =link_to "价格统计"
+    %table.table
+      %thead
         %tr
-          %td
-            =static[:price]
-          %td
-            =static[:count]
-.text-right
-  = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
+          %th.text-center 价格/元
+          %th.text-center 人数
+      %tbody
+        - @page_price_static.each do |static|
+          %tr
+            %td
+              =static[:price]
+            %td
+              =static[:count]
+  .text-right
+    = will_paginate @page_price_static, :previous_label=>'&laquo',:next_label=>'&raquo'
