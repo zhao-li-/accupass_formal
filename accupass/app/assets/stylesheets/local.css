@@ -44,3 +44,6 @@ a:hover {
 .body{
     clear: both;
 }
+.title{
+    font-size: 60px;
+}

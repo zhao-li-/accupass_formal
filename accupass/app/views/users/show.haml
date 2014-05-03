@@ -1,6 +1,22 @@
 .show
-
-    校歌赛
-  %h4
+  .title
+    =@bidding.activity_name
+  %h2
     参与人数：
+    =@bidding.people_count
+    \/
+    =@sign_up_messages
+.panel.panel-default(style="margin-top: 50px;" )
+  %table.table
+    %thead
+      %tr
+        %th 姓名
+        %th 电话
+    %tbody
+      - @bid_messages.each do |message|
+        %tr
+          %th
+            =message.user_name
+          %th
+            =message.phone
 

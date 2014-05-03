@@ -13,6 +13,21 @@ class UsersController < ApplicationController
       @page_user = current_user.user_name
       @activities = Activity.where(:user_name => current_user.user_name).paginate(page: params[:page],per_page: 10)
     end
+    bidding = Bid.find_by_status("start")
+    if bidding
+      flash.now[:bidding]="true"
+    else
+      flash.now[:no_bidding]="true"
+    end
+  end
+
+  def show
+    @bidding = Bid.find_by_status("start")
+    @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
+    p "-----------------------------------"
+    @bid_messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
+    # p bidding
+    # @bidding_messages = BidMessage.find(:activity_name =>@bidding.activity_name,:bid_id=>@bidding.bid_id,:current_user=>@bidding.current_user)
   end
 
   def register
