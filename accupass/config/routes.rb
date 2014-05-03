@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get '/bid_detail'=>'users#bid_detail',:as=>'bid_detail'
   get '/show'=>'users#show'
   get '/price_static'=>'users#price_static',:as=>'price_static'
+  post '/process_bidding_messages'=>'users#process_bidding_messages'
 
   resource :users, only: [:create]
 

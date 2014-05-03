@@ -38,6 +38,7 @@ function BidApplyController($scope,$navigate){
             return;
         }
         Bid.change_current_bid_status("start");
+        Activity.post_activity_information();
     }
     $scope.show_bid_info = function(){
         $scope.bid_applies = Bid.get_current_bid_messages();

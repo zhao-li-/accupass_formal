@@ -51,8 +51,13 @@ var native_accessor = {
                             native_accessor.send_sms(json_message.messages[0].phone,"您已成功出价，请勿重复出价");
                             return;
                         }
-                        bid_message.save_bid_message();
-                        BidMessages.refresh_bid_apply_page();
+//                        bid_message.save_bid_message();
+//                        BidMessages.refresh_bid_apply_page();
+                        $.ajax({
+                            type: "POST",
+                            url: "/process_bidding_messages",
+                            data: {"bid_message":JSON.parse(JSON.stringify(bid_message))}
+                        });
                         native_accessor.send_sms(json_message.messages[0].phone,"恭喜！您已出价成功");
                         return;
                     }

@@ -1,6 +1,6 @@
 #encoding: utf-8
 class UsersController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => [:process_phone_login,:process_activities_information ]
+  skip_before_filter :verify_authenticity_token, :only => [:process_bidding_messages,:process_phone_login,:process_activities_information ]
   def welcome
     if !current_user
       redirect_to :login
@@ -24,10 +24,15 @@ class UsersController < ApplicationController
   def show
     @bidding = Bid.find_by_status("start")
     @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
-    p "-----------------------------------"
-    @bid_messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
-    # p bidding
-    # @bidding_messages = BidMessage.find(:activity_name =>@bidding.activity_name,:bid_id=>@bidding.bid_id,:current_user=>@bidding.current_user)
+    @bid_messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user]).last(10)
+  end
+
+  def process_bidding_messages
+    BidMessage.create(params[:bid_message])
+
+    respond_to do |format|
+      format.json { render json: 'true' }
+    end
   end
 
   def register

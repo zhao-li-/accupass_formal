@@ -10,13 +10,15 @@
   %table.table
     %thead
       %tr
-        %th 姓名
-        %th 电话
+        %th.text-center
+          姓名
+        %th.text-center
+          电话
     %tbody
       - @bid_messages.each do |message|
         %tr
-          %th
+          %th.text-center
             =message.user_name
-          %th
+          %th.text-center
             =message.phone
 

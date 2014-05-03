@@ -5,6 +5,5 @@ class BidMessage < ActiveRecord::Base
     bid_messages.each do |(key,value)|
       BidMessage.create(value)
     end
-
   end
 end
