@@ -28,8 +28,15 @@ a:hover {
     padding-bottom: 30px;
     padding-top: 30px;
     text-align: center;
-    width: 100%;
     background-color: #EEEEEE;
     margin-bottom: 20px;
     font-size: 20px;
+    margin-left: -60px;
+    margin-right: -100px;
+    padding-left: 60px;
 }
+/*.bread{*/
+    /*margin-left: -60px;*/
+    /*margin-right: -60px;*/
+    /*padding-left: 60px;*/
+/*}*/
