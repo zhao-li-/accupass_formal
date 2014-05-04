@@ -1,18 +1,2 @@
-.show
-  .title
-    =@bidding.activity_name
-  %h2
-    参与人数：
-    =@bidding.people_count
-    \/
-    =@sign_up_messages
-.panel.panel-default(style="margin-top: 50px;" )
-  %table.table
-    %thead
-      %tr
-        %th.text-center
-          姓名
-        %th.text-center
-          电话
-    =render 'shared/bid_messages'
-
+=render 'shared/bid_messages'
+-#=render 'shared/bid_over'

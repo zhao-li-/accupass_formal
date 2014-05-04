@@ -22,17 +22,46 @@ class UsersController < ApplicationController
   end
 
   def show
+    @bidding = Bid.find_by_status("start")
+    if params[:winner_info]
+      @have_winner = true
+      p "-------------------------------"
+      p params[:winner_info]
+    end
+    if params[:no_winner]
+      @no_winner = true
+      p "..................."
+      p params[:no_winner]
+    end
     if params[:bid_message]
       BidMessage.create(params[:bid_message])
-      respond_to do |format|
-        format.html
-        format.js
+      # @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
+      # messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
+
+      p "------------------------------here---------------------"
+
+      @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
+      messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
+      @bid_messages_count = messages.length
+      p messages.length
+      p '111111111111111'
+      @bid_messages = messages.last(10)
+      render :show
+      # @bid_messages_count = messages.length
+      # @bid_messages = messages.last(10)
+      # respond_to do |format|
+        # format.html
+        # format.js
         # format.json { render json: 'true' }
-      end
     end
-    @bidding = Bid.find_by_status("start")
-    @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
-    @bid_messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user]).last(10)
+    # else
+      @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
+      messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
+      @bid_messages_count = messages.length
+      p messages.length
+      p '111111111111111'
+      @bid_messages = messages.last(10)
+    # end
   end
 
   # def process_bidding_messages

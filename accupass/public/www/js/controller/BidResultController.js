@@ -14,7 +14,14 @@ function BidResultController($scope,$navigate,$timeout){
             $scope.winner_name = Bid.get_winner_info().user_name;
             $scope.winner_price= Bid.get_winner_info().price;
             $scope.winner_phone= Bid.get_winner_info().phone;
+            $.ajax({type: "POST",
+                    url: "/process_bidding_messages",
+                    data: {"winner_info":Bid.get_winner_info()}})
+            return;
         }
+        $.ajax({type: "POST",
+            url: "/process_bidding_messages",
+            data: {"no_winner":"true"}})
     }
     $scope.find_winner();
     $scope.show_footer = function(){
