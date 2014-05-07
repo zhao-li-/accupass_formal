@@ -8,9 +8,12 @@ class BidMessage < ActiveRecord::Base
     end
   end
 
+  def self.get_bid_messages(bid_id,activity_name,current_user)
+    return BidMessage.where(:bid_id => bid_id,:activity_name=>activity_name,:current_user => current_user)
+  end
+
   def self.get_price_static(bid_id,activity_name,current_user)
-    messages = BidMessage.where(:bid_id => bid_id,:activity_name=>activity_name,:current_user => current_user)
-    return messages.group_by{|message|message.price}.map { |key,value|{price: key,count: value.length}}
+    return BidMessage.get_bid_messages(bid_id,activity_name,current_user).group_by{|message|message.price}.map { |key,value|{price: key,count: value.length}}
   end
 
   def self.get_winner(bid_id,activity_name,current_user)

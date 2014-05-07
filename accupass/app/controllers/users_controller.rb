@@ -191,15 +191,11 @@ class UsersController < ApplicationController
 
   def bid_detail
     @page_index = params[:page] ||1
-    messages = BidMessage.where(:bid_id => params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
-    @bid_messages = messages.paginate(page: params[:page],per_page: 10)
-    price_static = BidMessage.get_price_static(params[:bid_id],params[:activity_name],params[:current_user])
-    winner = price_static.sort_by { |static|static[:price].to_i}.find{|static|static[:count] == 1}
-    bid = Bid.where(:bid_id => params[:bid_id],:activity_name=>params[:activity_name],:current_user => params[:current_user])
-    if bid[0][:status]=="start"
+    @bid_messages = BidMessage.get_bid_messages(params[:bid_id],params[:activity_name],params[:current_user]).paginate(page: params[:page],per_page: 10)
+    if Bid.get_bid(params[:bid_id],params[:activity_name],params[:current_user])[:status]=="start"
       flash.now[:bidding]="true"
-    elsif winner
-      @winner_info = BidMessage.find_by_price(winner[:price])
+    elsif BidMessage.get_winner(params[:bid_id],params[:activity_name],params[:current_user])
+      @winner_info = BidMessage.get_winner_message(params[:bid_id],params[:activity_name],params[:current_user])
       flash.now[:winner]="true"
     else
       flash.now[:no_winner]="true"
@@ -212,7 +208,7 @@ class UsersController < ApplicationController
     if Bid.get_bid(params[:bid_id],params[:activity_name],params[:current_user])[:status]=="start"
       flash.now[:bidding]="true"
     elsif BidMessage.get_winner(params[:bid_id],params[:activity_name],params[:current_user])
-      @winner_info = self.get_winner_message(params[:bid_id],params[:activity_name],params[:current_user])
+      @winner_info = BidMessage.get_winner_message(params[:bid_id],params[:activity_name],params[:current_user])
       flash.now[:winner]="true"
     else
       flash.now[:no_winner]="true"
