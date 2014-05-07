@@ -1,28 +1,48 @@
 #bidding_messages
-  .show
-    .title
-      =@bidding.activity_name
-    %h2
-      参与人数：
-      #bid_message_count_id
+  - if !@show_over
+    .show
+      .title
+        =@bidding.activity_name
+      %h2
+        参与人数：
         =@bid_messages_count
-      \/
-      =@sign_up_messages
-  .panel.panel-default(style="margin-top: 50px;" )
-    %table.table
-      %thead
-        %tr
-          %th.text-center
-            姓名
-          %th.text-center
-            电话
-      %tbody
-        - @bid_messages.each do |message|
+        \/
+        =@sign_up_messages
+    .panel.panel-default(style="margin-top: 50px;" )
+      %table.table
+        %thead
           %tr
             %th.text-center
-              =message.user_name
+              姓名
             %th.text-center
-              =message.phone
--#:javascript
+              电话
+        %tbody
+          - @bid_messages.each do |message|
+            %tr
+              %th.text-center
+                =message.user_name
+              %th.text-center
+                =message.phone
+  - if @show_over
+    .show
+      .title
+        =@bidding.activity_name
+      %h2
+        比赛结果
+      %h3
+        -if @winner
+          %p
+            获胜者：
+            =@winner['user_name']
+          %p
+            出价：
+            =@winner['price']
+            元
+          %p
+            电话：
+            =@winner['phone']
+        - if !@winner
+          竞价失败
+:javascript
   setTimeout("$('#bidding_messages').load('show/#bidding_messages')",3000)
 -#=render 'shared/bid_over'

@@ -35,15 +35,15 @@ function BidApplyController($scope,$navigate){
                 Bid.clear_winner_info();
                 if(Bid.get_winner()){
                     $.ajax({type: "POST",
-                        url: "/process_bidding_messages",
+                        url: "/process_bid_over",
                         data: {"winner_info":Bid.get_winner_info()}})
                 }else{
                     $.ajax({type: "POST",
-                        url: "/process_bidding_messages",
-                        data: {"no_winner":"true"}})
-                    $navigate.go("/bid_result", 'slide', 'left');
-                }
+                        url: "/process_bid_over",
+                        data: {"no_winner":"no_winner"}})
 
+                }
+                $navigate.go("/bid_result", 'slide', 'left');
             }
             return;
         }

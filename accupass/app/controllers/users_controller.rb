@@ -1,6 +1,6 @@
 #encoding: utf-8
 class UsersController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => [:show,:process_phone_login,:process_activities_information ]
+  skip_before_filter :verify_authenticity_token, :only => [:process_bid_over,:show,:process_phone_login,:process_activities_information ]
   def welcome
     if !current_user
       redirect_to :login
@@ -19,42 +19,67 @@ class UsersController < ApplicationController
     else
       flash.now[:no_bidding]="true"
     end
+    if session[:this_bid_over]
+      session.delete(:this_bid_over)
+    end
   end
 
   def show
+    if session[:this_bid_over]
+      @show_over = true
+      @winner = session[:winner]
+    end
     @bidding = Bid.find_by_status("start")
-    if params[:winner_info]
-      @have_winner = true
-      p "---------------------have----------"
-      p params[:winner_info]
-    end
-    if params[:no_winner]
-      @no_winner = true
-      p "...............no........................."
-      p params[:no_winner]
-    end
+    # if params[:winner_info]
+    #   @show_over = true
+    #   @have_winner = true
+    #   @winner = params[:winner_info]
+      # session[:winner]=params[:winner_info]
+      # p "---------------------have----------"
+      # p session[:winner]
+      # p params[:winner_info]
+      # respond_to do |format|
+      #   format.html { redirect_to :show }
+      # end
+    # end
+    # if params[:no_winner]
+    #   @show_over = true
+    #   @no_winner = true
+      # session[:winner]=params[:no_winner]
+      # p "...............no........................."
+      # p session[:winner]
+      # respond_to do |format|
+      #   format.html { redirect_to :show}
+      # end
+    #
+    # end
     if params[:bid_message]
       BidMessage.create(params[:bid_message])
-
-      # @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
-      # messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
-      # @bid_messages_count = messages.length
-      # @bid_messages = messages.last(10)
-      @refresh = true
-      p "------------------------------here---------------------"
-
       respond_to do |format|
         format.html { redirect_to :show }
-        # format.js
       end
     end
-    # else
       @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
       messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
       @bid_messages_count = messages.length
       @bid_messages = messages.last(10)
-      p @bid_messages_count
-    # end
+  end
+
+  def process_bid_over
+    if params[:no_winner]
+      session[:this_bid_over] = true
+      session.delete(:winner)
+      respond_to do |format|
+        format.json { render json: 'true'}
+      end
+    end
+    if params[:winner_info]
+      session[:this_bid_over] = true
+      session[:winner]=params[:winner_info]
+      respond_to do |format|
+        format.json { render json: 'true'}
+      end
+    end
   end
 
   # def process_bidding_messages
