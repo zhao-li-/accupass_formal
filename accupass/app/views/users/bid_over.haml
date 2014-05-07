@@ -1,0 +1,23 @@
+.show
+  .title
+    =@bidding.activity_name
+  %h2
+    比赛结果
+  %h3
+    -if @have_winner
+      %p
+        获胜者：
+        =params[:winner_info].user_name
+      %p
+        出价：
+        =params[:winner_info].price
+        元
+      %p
+        电话：
+        =params[:winner_info].phone
+    - if @no_winner
+      竞价失败
+
+
+
+

@@ -33,7 +33,17 @@ function BidApplyController($scope,$navigate){
                 $scope.button_name = "结束";
                 Bid.change_current_bid_status("over");
                 Bid.clear_winner_info();
-                $navigate.go("/bid_result", 'slide', 'left');
+                if(Bid.get_winner()){
+                    $.ajax({type: "POST",
+                        url: "/process_bidding_messages",
+                        data: {"winner_info":Bid.get_winner_info()}})
+                }else{
+                    $.ajax({type: "POST",
+                        url: "/process_bidding_messages",
+                        data: {"no_winner":"true"}})
+                    $navigate.go("/bid_result", 'slide', 'left');
+                }
+
             }
             return;
         }

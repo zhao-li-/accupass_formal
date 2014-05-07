@@ -25,42 +25,35 @@ class UsersController < ApplicationController
     @bidding = Bid.find_by_status("start")
     if params[:winner_info]
       @have_winner = true
-      p "-------------------------------"
+      p "---------------------have----------"
       p params[:winner_info]
     end
     if params[:no_winner]
       @no_winner = true
-      p "..................."
+      p "...............no........................."
       p params[:no_winner]
     end
     if params[:bid_message]
       BidMessage.create(params[:bid_message])
+
       # @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
       # messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
-
-      p "------------------------------here---------------------"
-
-      @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
-      messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
-      @bid_messages_count = messages.length
-      p messages.length
-      p '111111111111111'
-      @bid_messages = messages.last(10)
-      render :show
       # @bid_messages_count = messages.length
       # @bid_messages = messages.last(10)
-      # respond_to do |format|
-        # format.html
+      @refresh = true
+      p "------------------------------here---------------------"
+
+      respond_to do |format|
+        format.html { redirect_to :show }
         # format.js
-        # format.json { render json: 'true' }
+      end
     end
     # else
       @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
       messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
       @bid_messages_count = messages.length
-      p messages.length
-      p '111111111111111'
       @bid_messages = messages.last(10)
+      p @bid_messages_count
     # end
   end
 
