@@ -30,29 +30,6 @@ class UsersController < ApplicationController
       @winner = session[:winner]
     end
     @bidding = Bid.find_by_status("start")
-    # if params[:winner_info]
-    #   @show_over = true
-    #   @have_winner = true
-    #   @winner = params[:winner_info]
-      # session[:winner]=params[:winner_info]
-      # p "---------------------have----------"
-      # p session[:winner]
-      # p params[:winner_info]
-      # respond_to do |format|
-      #   format.html { redirect_to :show }
-      # end
-    # end
-    # if params[:no_winner]
-    #   @show_over = true
-    #   @no_winner = true
-      # session[:winner]=params[:no_winner]
-      # p "...............no........................."
-      # p session[:winner]
-      # respond_to do |format|
-      #   format.html { redirect_to :show}
-      # end
-    #
-    # end
     if params[:bid_message]
       BidMessage.create(params[:bid_message])
       respond_to do |format|
@@ -81,14 +58,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
-  # def process_bidding_messages
-  #   BidMessage.create(params[:bid_message])
-  #
-  #   respond_to do |format|
-  #     format.json { render json: 'true' }
-  #   end
-  # end
 
   def register
     @user = User.new
