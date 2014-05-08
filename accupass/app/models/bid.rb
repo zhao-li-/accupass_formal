@@ -11,4 +11,8 @@ class Bid < ActiveRecord::Base
   def self.get_bid(bid_id,activity_name,current_user)
     return Bid.find_by(:bid_id => bid_id,:activity_name=>activity_name,:current_user => current_user)
   end
+
+  def self.get_start_bid
+    Bid.find_by_status("start")
+  end
 end

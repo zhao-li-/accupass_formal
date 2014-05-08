@@ -8,13 +8,12 @@ class UsersController < ApplicationController
     @page_index = params[:page] ||1
     if params[:user_name]
       @page_user = params[:user_name]
-      @activities = Activity.where(:user_name => params[:user_name]).paginate(page: params[:page],per_page: 10)
+      @activities = Activity.get_activities(params[:user_name]).paginate(page: params[:page],per_page: 10)
     else
       @page_user = current_user.user_name
-      @activities = Activity.where(:user_name => current_user.user_name).paginate(page: params[:page],per_page: 10)
+      @activities = Activity.get_activities(current_user.user_name).paginate(page: params[:page],per_page: 10)
     end
-    bidding = Bid.find_by_status("start")
-    if bidding
+    if Bid.get_start_bid
       flash.now[:bidding]="true"
     else
       flash.now[:no_bidding]="true"
@@ -29,7 +28,7 @@ class UsersController < ApplicationController
       @show_over = true
       @winner = session[:winner]
     end
-    @bidding = Bid.find_by_status("start")
+    @bidding = Bid.get_start_bid
     if params[:bid_message]
       BidMessage.create(params[:bid_message])
       respond_to do |format|
@@ -72,7 +71,7 @@ class UsersController < ApplicationController
   end
 
   def create_login_session
-    user = User.find_by_user_name(params[:user_name])
+    user = User.get_activity(params[:user_name])
     if user && user.authenticate(params[:password])
       cookies.permanent[:token] = user.token
       if user.admin?
@@ -111,7 +110,7 @@ class UsersController < ApplicationController
     if params[:user][:user_name]==''
       flash.now[:error] ='账号不能为空'
     end
-    user = User.find_by_user_name(params[:user][:user_name])
+    user = User.get_activity(params[:user][:user_name])
     if user
       session[:change_user_name]=params[:user][:user_name]
       redirect_to forget_second_path
@@ -121,12 +120,12 @@ class UsersController < ApplicationController
   end
 
   def forget_second
-    user =User.find_by_user_name(session[:change_user_name])
+    user =User.get_activity(session[:change_user_name])
     @forget_question = user[:forget_question]
   end
 
   def post_forget_second
-    user =User.find_by_user_name(session[:change_user_name])
+    user =User.get_activity(session[:change_user_name])
     @forget_question = user[:forget_question]
     if params[:user][:forget_answer]==""
       flash.now[:error]="请输入答案"
@@ -143,7 +142,7 @@ class UsersController < ApplicationController
   end
 
   def post_forget_third
-    user = User.find_by_user_name(session[:change_user_name])
+    user = User.get_activity(session[:change_user_name])
     if params[:user][:password]!=params[:user][:password_confirmation]
       flash.now[:error]='两次密码输入不一致，请重新输入'
       render :forget_third
@@ -158,7 +157,7 @@ class UsersController < ApplicationController
   end
 
   def process_phone_login
-    user = User.find_by_user_name(params[:user_name])
+    user = User.get_activity(params[:user_name])
     respond_to do |format|
       if user && user.authenticate(params[:password])
         format.json { render json: "true" }

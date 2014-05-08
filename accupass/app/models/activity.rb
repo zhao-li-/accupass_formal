@@ -6,6 +6,9 @@ class Activity < ActiveRecord::Base
     activities.each do |(key,value)|
       Activity.create(value)
     end
+  end
 
+  def self.get_activities(user_name)
+    Activity.where(:user_name => user_name)
   end
 end
