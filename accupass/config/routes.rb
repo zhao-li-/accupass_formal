@@ -1,19 +1,10 @@
 Rails.application.routes.draw do
-  get 'add_user'=> 'admin#add_user',:as =>'add_user'
-
-  get  'change_password'=> 'admin#change_password',:as => 'change_password'
-
-  get  'manager_index'=> 'admin#manager_index',:as =>'manager_index'
-
+  #user
   root to:  'users#welcome', :as => 'welcome'
-
   get '/register' =>'users#register', :as => 'register'
-
   get '/login' => 'users#login', :as => 'login'
   post '/create_login_session' => 'users#create_login_session'
   delete "logout" => "users#logout", :as => "logout"
-  post '/post_change_password'=>'admin#post_change_password'
-  delete '/del_user'=>'admin#del_user'
   get '/forget_first' => 'users#forget_first',:as => 'forget_first'
   post '/post_forget_first' => 'users#post_forget_first'
   get '/forget_second' => 'users#forget_second',:as => 'forget_second'
@@ -29,6 +20,12 @@ Rails.application.routes.draw do
   get '/price_static'=>'users#price_static',:as=>'price_static'
   post '/process_bidding_messages'=>'users#show'
   post '/process_bid_over'=>'users#process_bid_over'
+  #admin
+  get 'add_user'=> 'admin#add_user',:as =>'add_user'
+  get  'change_password'=> 'admin#change_password',:as => 'change_password'
+  get  'manager_index'=> 'admin#manager_index',:as =>'manager_index'
+  post '/post_change_password'=>'admin#post_change_password'
+  delete '/del_user'=>'admin#del_user'
 
   resource :users, only: [:create]
 

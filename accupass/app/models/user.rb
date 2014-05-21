@@ -20,5 +20,9 @@ class User < ActiveRecord::Base
     User.find_by_user_name(user_name)
   end
 
+  def self.get_users
+    User.where("id > 2")
+  end
+
 
 end

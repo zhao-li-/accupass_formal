@@ -7,17 +7,17 @@ class AdminController < ApplicationController
   end
 
   def del_user
-    User.find_by_user_name(params[:user_name]).delete
+    User.get_activity(params[:user_name]).delete
     redirect_to :manager_index
   end
 
   def change_password
     session[:user_name]=params[:user_name]
-    @user = User.find_by_user_name(params[:user_name])
+    @user = User.get_activity(params[:user_name])
   end
 
   def post_change_password
-    @user = User.find_by_user_name(session[:user_name])
+    @user = User.get_activity(session[:user_name])
     if params[:user][:password]!= params[:user][:password_confirmation]
       flash[:error]="两次密码输入不一致，请重新输入"
       render :change_password
@@ -36,7 +36,7 @@ class AdminController < ApplicationController
       redirect_to :login
     end
     @page_index = params[:page] ||1
-    @users = User.where("id > 2").paginate(page: params[:page],per_page: 10)
+    @users = User.get_users.paginate(page: params[:page],per_page: 10)
   end
 end
 

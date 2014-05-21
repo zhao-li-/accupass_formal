@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     end
     if Bid.get_start_bid
       flash.now[:bidding]="true"
-    else
+    elfse
       flash.now[:no_bidding]="true"
     end
     if session[:this_bid_over]
@@ -35,8 +35,8 @@ class UsersController < ApplicationController
         format.html { redirect_to :show }
       end
     end
-      @sign_up_messages = SignUpMessage.where(:activity_name => @bidding[:activity_name],:current_user => @bidding[:current_user] ).length
-      messages = BidMessage.where(:activity_name => @bidding[:activity_name],:bid_id => @bidding[:bid_id],:current_user => @bidding[:current_user])
+      @sign_up_messages = SignUpMessage.get_sign_up_messages(@bidding[:activity_name],@bidding[:current_user] ).length
+      messages = BidMessage.get_bid_messages( @bidding[:bid_id], @bidding[:activity_name], @bidding[:current_user])
       @bid_messages_count = messages.length
       @bid_messages = messages.last(10)
   end
